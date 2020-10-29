@@ -5,41 +5,46 @@ html {
 body {
   color: rgb(221, 221, 221);
   margin: 0;
-  background-color: rgb(46, 46, 46);
 }
 
 header {
-  background: rgb(42, 42, 42);
+  background-color: #171A21;
   height: 100px;
-  border-bottom: solid rgb(68, 70, 77) 3px;
 }
 
-h1, h2 {
+h1 {
   text-align: center;
-  color: rgb(207, 207, 207);
+  color:#C6C4C2;
   line-height: 100px;
   margin: 0;
+}
+
+h2 {
+  text-align: center;
+  color:#C6C4C2;
+  line-height: 100px;
+  margin: 0;
+  background-color: #1B2838;
 }
 
 section {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(46, 46, 46);
+  background-color:#1B2838;
 }
 
 article {
   text-align: center;
   width: 1000px;
-  height: 300px;
+  height: 200px;
   padding: 10px;
-  margin: 20px;
-  background: rgb(68, 70, 77);
-  border-radius: 12px;
+  background:#2F343E;
+  box-shadow: 0px 0px 5px black;
+
 }
 
 .search-container {
-  width: 100%;
 }
 
 #search-bar {
@@ -47,8 +52,8 @@ article {
   margin-top: 50px;
   width: 60%;
   height: 30px;
-  border-radius: 12px;
-  background-color: rgb(207, 207, 207);
+  border-radius: 6px;
+  background-color: #C6C4C2;
 }
 
 #search-icon {
@@ -59,11 +64,9 @@ article {
 
 .achievements-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-}
-
-.achievement {
-  background-color: rgb(94, 97, 107);
-  width: 80%;
+  align-items: center;
+  padding: 0px 50px 50px 50px;
+  background-color:#1B2838;
 }
