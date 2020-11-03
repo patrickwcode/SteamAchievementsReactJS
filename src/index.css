@@ -20,11 +20,7 @@ h1 {
 }
 
 h2 {
-  text-align: center;
-  color:#C6C4C2;
-  line-height: 100px;
-  margin: 0;
-  background-color: #1B2838;
+  
 }
 
 section {
@@ -62,7 +58,22 @@ article {
   height: 100%;
 }
 
+.game-info-container {
+  padding: 0px 100px;
+  background-color: red;
+}
+
+.subtitle {
+  float: left;
+  
+}
+
+.game-image {
+  float: right;
+  padding-top: 20px;
+}
+
 #achievements-container {
-  padding: 0px 50px 100px 50px;
+  padding: 0px 5% 40% 5%;
   background-color:#1B2838;
 }

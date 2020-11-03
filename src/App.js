@@ -37,10 +37,10 @@ const achievements = [
 function GameAchievement(props) {
   return (
     <div>
-      <h1>{props.name}</h1>
-      <h1>{props.description}</h1>
-      <h1>{props.percent}</h1>
-      <h1>{props.iconUrl}</h1>
+      {props.name}
+      {props.description}
+      {props.percent}
+      {props.iconUrl}
     </div>
   )
 }
