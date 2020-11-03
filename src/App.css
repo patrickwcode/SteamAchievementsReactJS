@@ -11,7 +11,9 @@ body, textarea {
 }
 
 .achieveRow {
-	padding: 20px 60px 20px 60px;
+	width: 52%;
+	margin: auto;
+	padding: 10px 20px 10px 20px;
 	background-color:#111923;
 }
 
@@ -50,13 +52,13 @@ body, textarea {
 .achieveTxt h3 {
 	margin: 5px 5px 0px 5px;
 	font-weight:normal;
-	font-size:24px;
+	font-size:18px;
 	color: #C6D4DF;
 }
 
 .achieveTxt h5 {
 	margin: 0px 5px 5px 5px;
 	font-weight:normal;
-	font-size:16px;
+	font-size:14px;
 	color: #8F98A0;
 }
