@@ -8,36 +8,34 @@ body {
 }
 
 header {
-  background-color: #171A21;
-  height: 100px;
+  background-color: #171a21;
+  height: 5em;
 }
 
 h1 {
   text-align: center;
-  color:#C6C4C2;
-  line-height: 100px;
+  color: #c6c4c2;
   margin: 0;
 }
 
 h2 {
-  
 }
 
 section {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color:#1B2838;
+  background-color: #1b2838;
 }
 
 article {
   text-align: center;
-  width: 1000px;
-  height: 200px;
+  width: 52%;
+  height: 50%;
+  margin: auto;
   padding: 10px;
-  background:#2F343E;
+  background-color: #2f343e;
   box-shadow: 0px 0px 5px black;
-
 }
 
 .search-container {
@@ -49,7 +47,7 @@ article {
   width: 60%;
   height: 30px;
   border-radius: 6px;
-  background-color: #C6C4C2;
+  background-color: #c6c4c2;
 }
 
 #search-icon {
@@ -59,13 +57,22 @@ article {
 }
 
 .game-info-container {
-  padding: 0px 100px;
-  background-color: red;
 }
 
 .subtitle {
   float: left;
-  
+  text-align: left;
+  padding-top: 20px;
+}
+
+.subtitle h2 {
+  color: #67c1f5;
+  margin: 0;
+}
+
+.subtitle h3 {
+  color: #c6d4df;
+  margin: 0;
 }
 
 .game-image {
@@ -75,5 +82,26 @@ article {
 
 #achievements-container {
   padding: 0px 5% 40% 5%;
-  background-color:#1B2838;
+  background-color: #1b2838;
+}
+
+@media screen and (max-width: 856px) {
+  article {
+    width: 100%;
+  }
+
+  .game-image {
+    width: 100%;
+    clear: both;
+  }
+
+  .subtitle {
+    width: 100%;
+    text-align: center;
+  }
+
+  #achievements-container {
+    padding: 0;
+    background-color:#111923;
+  }
 }

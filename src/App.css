@@ -11,9 +11,9 @@ body, textarea {
 }
 
 .achieveRow {
-	max-width: 950px;
+	width: 55%;
 	margin: auto;
-	padding: 10px 20px 10px 20px;
+	padding: 0.5em 1em 0.5em 1em;
 	background-color:#111923;
 }
 
@@ -61,4 +61,14 @@ body, textarea {
 	font-weight:normal;
 	font-size:14px;
 	color: #8F98A0;
+}
+
+@media screen and (max-width: 856px) {
+	.achieveRow {
+		width: 90%;
+	}
+
+	.achievePercent {
+		padding-left: 1em;
+	}
 }
