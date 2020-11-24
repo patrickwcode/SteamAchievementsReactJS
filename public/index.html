@@ -44,19 +44,35 @@
           <!--<input id="search-icon" type="image" src="/src/magnifying-glass.svg" alt="Search">
           </input> -->    
         </div>
-        <div class="game-info-container">
+        <div class="game-info">
           <div class="subtitle">
             <h2>Global Gameplay Stats</h2>
             <h3>Team Fortress 2</h3>
           </div>
-          <div class="game-image">
+          <div class="game-image-container">
             <img src="https://steamcdn-a.akamaihd.net/steam/apps/440/capsule_184x69.jpg" alt="Team Fortress 2">
           </div>
-        </div>  
+        </div>
       </article>
     </section>
 
     <div id="achievements-container">
+      <div class="search-filters">
+        <label for="filter-select">Sort By:</label>
+        
+        <select name="filters" id="filter">
+          <option value="blank"></option>
+          <option value="high-low">High-Low</option>
+          <option value="low-high">Low-High</option>
+          <option value="A-Z">A-Z</option>
+          <option value="Z-A">Z-A</option>
+        </select>
+
+        <input type="checkbox" id="tile-view" name="tile-view" value="tile-view">
+        <label for="tile-view">Tile View</label>
+      </div>
+    </div> 
+      
       <div class="achieveRow">
         <div class="achieveImgHolder">
             <img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/440/924764eea604817d3c14de9640ae6422c7cdfb7a.jpg"
@@ -79,9 +95,9 @@
                 width="64" height="64" border="0">
         </div>
         <div class="achieveTxtHolder">
-            <div class="achieveFill" style="width: 55%">
+            <div class="achieveFill" style="width: 20%">
             </div>
-            <div class="achievePercent">55.0%</div>
+            <div class="achievePercent">20.0%</div>
             <div class="achieveTxt">
                 <h3>Race for the Pennant</h3>
                 <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic laudantium, totam, nostrum id ad sunt vero provident obcaecati reiciendis consequuntur quo</h5>
@@ -95,9 +111,9 @@
                 width="64" height="64" border="0">
         </div>
         <div class="achieveTxtHolder">
-            <div class="achieveFill" style="width: 55%">
+            <div class="achieveFill" style="width: 32%">
             </div>
-            <div class="achievePercent">55.0%</div>
+            <div class="achievePercent">32.0%</div>
             <div class="achieveTxt">
                 <h3>Race for the Pennant</h3>
                 <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic laudantium, totam, nostrum id ad sunt vero provident obcaecati reiciendis consequuntur quo</h5>
@@ -111,9 +127,9 @@
                 width="64" height="64" border="0">
         </div>
         <div class="achieveTxtHolder">
-            <div class="achieveFill" style="width: 55%">
+            <div class="achieveFill" style="width: 5%">
             </div>
-            <div class="achievePercent">55.0%</div>
+            <div class="achievePercent">5.0%</div>
             <div class="achieveTxt">
                 <h3>Race for the Pennant</h3>
                 <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic laudantium, totam, nostrum id ad sunt vero provident obcaecati reiciendis consequuntur quo</h5>
@@ -127,9 +143,9 @@
                 width="64" height="64" border="0">
         </div>
         <div class="achieveTxtHolder">
-            <div class="achieveFill" style="width: 55%">
+            <div class="achieveFill" style="width: 86%">
             </div>
-            <div class="achievePercent">55.0%</div>
+            <div class="achievePercent">86.0%</div>
             <div class="achieveTxt">
                 <h3>Race for the Pennant</h3>
                 <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic laudantium, totam, nostrum id ad sunt vero provident obcaecati reiciendis consequuntur quo</h5>

@@ -80,6 +80,14 @@ article {
   padding-top: 20px;
 }
 
+.search-filters {
+  text-align: center;
+  width: 55%;
+	margin: auto;
+	padding: 0.5em 1em 0.5em 1em;
+  background-color: #0A0F15;
+}
+
 #achievements-container {
   padding: 0px 5% 40% 5%;
   background-color: #1b2838;
@@ -98,6 +106,10 @@ article {
   .subtitle {
     width: 100%;
     text-align: center;
+  }
+
+  .search-filters {
+    width: 100%;
   }
 
   #achievements-container {
