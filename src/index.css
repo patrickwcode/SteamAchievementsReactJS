@@ -89,7 +89,8 @@ article {
 }
 
 #achievements-container {
-  padding: 0px 5% 40% 5%;
+  width: 100%;
+  padding: 0px 5% 0% 5%;
   background-color: #1b2838;
 }
 
