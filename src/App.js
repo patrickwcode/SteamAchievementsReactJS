@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import { achievementModal } from './Modal.js';
+import Modal from "./Modal";
+import useModal from "./useModal";
 
 const achievements = [
   {
@@ -46,24 +47,42 @@ function GameAchievement(props) {
   )
 }
 
-function App() {
+// function GameAchievementsMap() {
+//   return (
+//     <ol>
+//       { achievements.map(achievement => (
+//         <li key={achievement.name}>
+//           { <GameAchievement name={achievement.name} /> }
+//           { <GameAchievement description={achievement.description} /> }
+//           { <GameAchievement percent={achievement.percent} /> }
+//           { <GameAchievement iconUrl={achievement.iconUrl} /> }
+//         </li>
+//       ))}
+//     </ol>
+//   );
+// }
+
+const App = () => {
+  const {isVisible, toggleModal} = useModal();
   return (
-    <ol>
+    <div>
+      <button onClick={toggleModal}>
+        Show modal
+      </button>
+      <Modal isVisible={isVisible} hideModal={toggleModal} />
+
+      <ol>
       { achievements.map(achievement => (
         <li key={achievement.name}>
-          { <GameAchievement name={achievement.name} />}
-          { <GameAchievement description={achievement.description} />}
-          { <GameAchievement percent={achievement.percent} />}
-          { <GameAchievement iconUrl={achievement.iconUrl} />}
-          <button onClick={() => achievementModal(achievement.name, achievement.description)}>
-            Show description
-          </button>
+          { <GameAchievement name={achievement.name} /> }
+          { <GameAchievement description={achievement.description} /> }
+          { <GameAchievement percent={achievement.percent} /> }
+          { <GameAchievement iconUrl={achievement.iconUrl} /> }
         </li>
       ))}
     </ol>
+    </div>
   );
-}
-
-// ReactDOM.render(<App />, document.getElementById('achievements-container'));
+};
 
 export default App;
