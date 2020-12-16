@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import Modal from "./Modal";
-import useModal from "./useModal";
+import createModal from './CreateModal';
+import useModal from './useModal';
 
 const achievements = [
   {
@@ -63,24 +63,23 @@ function GameAchievement(props) {
 // }
 
 const App = () => {
-  const {isVisible, toggleModal} = useModal();
+  const { isVisible, toggleModal } = useModal();
   return (
     <div>
-      <button onClick={toggleModal}>
-        Show modal
-      </button>
-      <Modal isVisible={isVisible} hideModal={toggleModal} />
-
       <ol>
-      { achievements.map(achievement => (
-        <li key={achievement.name}>
-          { <GameAchievement name={achievement.name} /> }
-          { <GameAchievement description={achievement.description} /> }
-          { <GameAchievement percent={achievement.percent} /> }
-          { <GameAchievement iconUrl={achievement.iconUrl} /> }
-        </li>
-      ))}
-    </ol>
+        {achievements.map(achievement => (
+          <li key={achievement.name}>
+            { <GameAchievement name={achievement.name} />}
+            { <GameAchievement description={achievement.description} />}
+            { <GameAchievement percent={achievement.percent} />}
+            { <GameAchievement iconUrl={achievement.iconUrl} />}
+            <button onClick={createModal(isVisible, toggleModal)}>
+              Show modal
+            </button>
+           
+          </li>
+        ))}
+      </ol>
     </div>
   );
 };
