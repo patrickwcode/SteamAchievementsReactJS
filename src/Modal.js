@@ -1,16 +1,18 @@
 import * as React from "react";
 import { createPortal } from "react-dom";
 
-const Modal = ({ isVisible, hideModal }) => {
+const Modal = ({ isVisible, hideModal, achievementName, achievementPercent, achievementDescription, achievementIconUrl }) => {
 
   return isVisible
     ? createPortal(
       <div>
         <div>
-          <h5>Modal</h5>
+          <h5>{achievementName}</h5>
           <span>
-            Why this modal has popped up
-            </span>
+              {achievementPercent}
+              {achievementDescription}
+              {achievementIconUrl}
+          </span>
         </div>
         <button onClick={hideModal}>
           Close
@@ -19,6 +21,6 @@ const Modal = ({ isVisible, hideModal }) => {
       document.body,
     )
     : null;
-}; 
+};
 
 export default Modal;
