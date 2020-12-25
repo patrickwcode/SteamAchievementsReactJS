@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Race for the Pennant 1",
+    "description": "#1 Run 25 kilometers.",
+    "percent": 30,
+    "iconUrl": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/440/924764eea604817d3c14de9640ae6422c7cdfb7a.jpg"
+  },
+  {
+    "name": "Race for the Pennant 2",
+    "description": "#2 Run 50 kilometers.",
+    "percent": 35,
+    "iconUrl": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/440/924764eea604817d3c14de9640ae6422c7cdfb7a.jpg"
+  },
+  {
+    "name": "Race for the Pennant 3",
+    "description": "#3 Run 75 kilometers.",
+    "percent": 5,
+    "iconUrl": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/440/924764eea604817d3c14de9640ae6422c7cdfb7a.jpg"
+  },
+  {
+    "name": "Race for the Pennant 4",
+    "description": "#4 Run 100 kilometers.",
+    "percent": 90,
+    "iconUrl": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/440/924764eea604817d3c14de9640ae6422c7cdfb7a.jpg"
+  }
+]
