@@ -15,9 +15,11 @@ const App = () => {
             { <GameAchievement name={achievement.name}
               description={achievement.description}
               percent={achievement.percent}
-              iconUrl={achievement.iconUrl} />}
+              iconUrl={achievement.iconUrl} 
+              />}
 
-            <Modal isVisible={isVisible}
+            <Modal key={achievement.name} 
+              isVisible={isVisible}
               hideModal={toggleModal}
               achievementName={achievement.name}
               achievementPercent={achievement.percent}
