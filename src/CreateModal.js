@@ -4,7 +4,7 @@ import Modal from './Modal';
 function CreateModal(isVisible, toggleModal) {
     return (
         <div>
-             <Modal isVisible={isVisible} hideModal={toggleModal} />
+            <Modal isVisible={isVisible} hideModal={toggleModal} />
         </div>
     )
 }
