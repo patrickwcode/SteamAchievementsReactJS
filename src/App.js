@@ -70,6 +70,7 @@ class App extends React.Component {
                     description={achievement.props.description}
                     percent={achievement.props.percent}
                     iconUrl={achievement.props.iconUrl}
+                    //test
                 />
             )
         })
