@@ -1,36 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8" />
+    <!-- <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+    /> -->
     <title>Steam Achievements Search</title>
   </head>
   <body>
-    <div id="root"></div>
-  <div style="display: none">
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    
+  <div>    
     <header>
       <h1>Steam Achievements Search</h1>
     </header>
@@ -57,104 +39,24 @@
       </article>
     </section>
     
-    <div class="search-filters">
+    <!-- <div class="search-filters">
         <label for="filter-select">Sort By:</label>
         
-        <select name="filters" id="filter">
+        <select name="filters" id="filter" onchange="sortNameAscending()">
           <option value="blank"></option>
-          <option value="high-low">High-Low</option>
-          <option value="low-high">Low-High</option>
+          <option value="%-Ascending">% Ascending</option>
+          <option value="%-Descending">% Descending</option>
           <option value="A-Z">A-Z</option>
           <option value="Z-A">Z-A</option>
         </select>
 
         <input type="checkbox" id="tile-view" name="tile-view" value="tile-view">
         <label for="tile-view">Tile View</label>
-      </div>
+      </div> -->
   
-    <div id="achievements-container">
+      <div id="root"></div>
+    <!-- <div id="achievements-container"> -->
       
-      
-      <div class="achieveRow">
-        <div class="achieveImgHolder">
-            <img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/440/924764eea604817d3c14de9640ae6422c7cdfb7a.jpg"
-                width="64" height="64" border="0">
         </div>
-        <div class="achieveTxtHolder">
-            <div class="achieveFill" style="width: 55%">
-            </div>
-            <div class="achievePercent">55.0%</div>
-            <div class="achieveTxt">
-                <h3>Race for the Pennant</h3>
-                <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic laudantium, totam, nostrum id ad sunt vero provident obcaecati reiciendis consequuntur quo</h5>
-            </div>
-        </div>
-      </div>
-
-      <div class="achieveRow">
-        <div class="achieveImgHolder">
-            <img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/440/924764eea604817d3c14de9640ae6422c7cdfb7a.jpg"
-                width="64" height="64" border="0">
-        </div>
-        <div class="achieveTxtHolder">
-            <div class="achieveFill" style="width: 20%">
-            </div>
-            <div class="achievePercent">20.0%</div>
-            <div class="achieveTxt">
-                <h3>Race for the Pennant</h3>
-                <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic laudantium, totam, nostrum id ad sunt vero provident obcaecati reiciendis consequuntur quo</h5>
-            </div>
-        </div>
-      </div>
-
-      <div class="achieveRow">
-        <div class="achieveImgHolder">
-            <img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/440/924764eea604817d3c14de9640ae6422c7cdfb7a.jpg"
-                width="64" height="64" border="0">
-        </div>
-        <div class="achieveTxtHolder">
-            <div class="achieveFill" style="width: 32%">
-            </div>
-            <div class="achievePercent">32.0%</div>
-            <div class="achieveTxt">
-                <h3>Race for the Pennant</h3>
-                <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic laudantium, totam, nostrum id ad sunt vero provident obcaecati reiciendis consequuntur quo</h5>
-            </div>
-        </div>
-      </div>
-
-      <div class="achieveRow">
-        <div class="achieveImgHolder">
-            <img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/440/924764eea604817d3c14de9640ae6422c7cdfb7a.jpg"
-                width="64" height="64" border="0">
-        </div>
-        <div class="achieveTxtHolder">
-            <div class="achieveFill" style="width: 5%">
-            </div>
-            <div class="achievePercent">5.0%</div>
-            <div class="achieveTxt">
-                <h3>Race for the Pennant</h3>
-                <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic laudantium, totam, nostrum id ad sunt vero provident obcaecati reiciendis consequuntur quo</h5>
-            </div>
-        </div>
-      </div>
-
-      <div class="achieveRow">
-        <div class="achieveImgHolder">
-            <img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/440/924764eea604817d3c14de9640ae6422c7cdfb7a.jpg"
-                width="64" height="64" border="0">
-        </div>
-        <div class="achieveTxtHolder">
-            <div class="achieveFill" style="width: 86%">
-            </div>
-            <div class="achievePercent">86.0%</div>
-            <div class="achieveTxt">
-                <h3>Race for the Pennant</h3>
-                <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic laudantium, totam, nostrum id ad sunt vero provident obcaecati reiciendis consequuntur quo</h5>
-            </div>
-        </div>
-      </div>
-    </div>
-
   </body>
 </html>
