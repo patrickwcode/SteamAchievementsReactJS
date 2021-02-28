@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-export default function GameAchievement(achievement) {
+export default function GameAchievement(props) {
   return (
 
     //   num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -13,22 +13,22 @@ export default function GameAchievement(achievement) {
 
     // LOOK INTO PAGINATION FOR RENDERING ACHIEVEMENTS
     <div>
-      <div className="achieveRow" >
+      <div className="achieveRow">
         <div className="achieveImgHolder">
-          <img src={achievement.iconUrl}
+          <img src={props.iconUrl}
             alt="Achievement Logo" width="64" height="64" border="0" />
         </div>
         <div className="achieveTxtHolder">
-          <div className="achieveFill" style={{ width: `${achievement.percent}%` }}>
+          <div className="achieveFill" style={{ width: `${props.percent}%` }}>
           </div>
-          <div className="achievePercent">{achievement.percent}%</div>
+          <div className="achievePercent">{props.percent}%</div>
           <div className="achieveTxt">
-            <h3>{achievement.name}</h3>
-            <h5>{achievement.description}
+            <h3>{props.name}</h3>
+            <h5>{props.description}
             </h5>
           </div>
         </div>
       </div>
     </div>
   )
-}
+} 
