@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function GameAchievement(props) {
+
   return (
 
     //   num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });

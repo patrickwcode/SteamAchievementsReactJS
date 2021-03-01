@@ -75,7 +75,8 @@ class App extends React.Component {
     };
 
     sortAchievements = () => {
-        const { achievements } = this.state
+        const { achievements } = this.state;
+        const { achievementsTiled } = this.state;
         const sel = document.getElementById("filter-select").value;
         if (sel === "original") {
             this.setState({
@@ -88,7 +89,17 @@ class App extends React.Component {
                         percent={achievement.props.percent}
                         iconUrl={achievement.props.iconUrl}
                     />
-                )
+                ),
+                achievementsTiled: achievementsTiled.sort((a, b) => a.props.id - b.props.id).map(achievement =>
+                    <TileAchievement
+                        key={achievement.props.id}
+                        name={achievement.props.name}
+                        id={achievement.props.id}
+                        description={achievement.props.description}
+                        percent={achievement.props.percent}
+                        iconUrl={achievement.props.iconUrl}
+                    />
+                ),
             })
         }
         if (sel === "percent-ascending") {
@@ -102,7 +113,17 @@ class App extends React.Component {
                         percent={achievement.props.percent}
                         iconUrl={achievement.props.iconUrl}
                     />
-                )
+                ),
+                achievementsTiled: achievementsTiled.sort((a, b) => a.props.percent - b.props.percent).map(achievement =>
+                    <TileAchievement
+                        key={achievement.props.id}
+                        name={achievement.props.name}
+                        id={achievement.props.id}
+                        description={achievement.props.description}
+                        percent={achievement.props.percent}
+                        iconUrl={achievement.props.iconUrl}
+                    />
+                ),
             })
         }
         if (sel === "percent-descending") {
@@ -116,7 +137,17 @@ class App extends React.Component {
                         percent={achievement.props.percent}
                         iconUrl={achievement.props.iconUrl}
                     />
-                )
+                ),
+                achievementsTiled: achievementsTiled.sort((a, b) => b.props.percent - a.props.percent).map(achievement =>
+                    <TileAchievement
+                        key={achievement.props.id}
+                        name={achievement.props.name}
+                        id={achievement.props.id}
+                        description={achievement.props.description}
+                        percent={achievement.props.percent}
+                        iconUrl={achievement.props.iconUrl}
+                    />
+                ),
             })
         }
         if (sel === "name-ascending") {
@@ -130,7 +161,17 @@ class App extends React.Component {
                         percent={achievement.props.percent}
                         iconUrl={achievement.props.iconUrl}
                     />
-                )
+                ),
+                achievementsTiled: achievementsTiled.sort((a, b) => a.props.name.charAt(0).toUpperCase() > b.props.name.charAt(0).toUpperCase()).map(achievement =>
+                    <TileAchievement
+                        key={achievement.props.id}
+                        name={achievement.props.name}
+                        id={achievement.props.id}
+                        description={achievement.props.description}
+                        percent={achievement.props.percent}
+                        iconUrl={achievement.props.iconUrl}
+                    />
+                ),
             })
         }
         if (sel === "name-descending") {
@@ -144,14 +185,24 @@ class App extends React.Component {
                         percent={achievement.props.percent}
                         iconUrl={achievement.props.iconUrl}
                     />
-                )
+                ),
+                achievementsTiled: achievements.sort((a, b) => a.props.name.charAt(0).toUpperCase() < b.props.name.charAt(0).toUpperCase()).map(achievement =>
+                    <TileAchievement
+                        key={achievement.props.id}
+                        name={achievement.props.name}
+                        id={achievement.props.id}
+                        description={achievement.props.description}
+                        percent={achievement.props.percent}
+                        iconUrl={achievement.props.iconUrl}
+                    />
+                ),
             })
         }
     }
 
     tileCheckboxToggle = () => {
         const checkbox = document.getElementById('tile-view-checkbox').checked;
-        this.setState ({ tileView: checkbox });
+        this.setState({ tileView: checkbox });
     }
 
     render() {
@@ -160,20 +211,21 @@ class App extends React.Component {
             // this.setState ({ tileView: !this.state.tileView })
             if (this.state.tileView) {
                 return (
-                <div>
-                    {console.log("Hello Tiled return")}
-                    {this.state.achievementsTiled}
-                </div>
+                    <div className="achieveTileContainer">
+                        {console.log("Hello Tiled return")}
+                        {this.state.achievementsTiled}
+                    </div>
                 )
             } else {
                 return (
-                <div>
-                    {console.log("Hello normal return")}
-                    {this.state.achievements}
-                </div>
+                    <div className="achievements-container">
+                        {console.log("Hello normal return")}
+                        {this.state.achievements}
+                    </div>
                 )
             }
         }
+
         return (
             <div>
                 <div className="search-filters">

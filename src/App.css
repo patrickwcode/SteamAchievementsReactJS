@@ -10,11 +10,34 @@ body, textarea {
     padding:1px 10px 1px 0px;
 }
 
+.achieveImgHolderTile {
+	/* float: left; */
+	width: 64px;
+	height: 64px;
+	/* margin: auto; */
+	padding: 0.8em;
+}
+
 .achieveRow {
 	width: 55%;
 	margin: auto;
 	padding: 0.5em 1em 0.5em 1em;
 	background-color:#111923;
+}
+
+.achieveRowTile {
+	/* margin: auto; */
+	/* padding: 1em; */
+	background-color:#111923;
+	/* border: solid red 1px; */
+}
+
+.achieveTileContainer {
+	width: 65%;
+	display: flex;
+	margin: auto;
+	justify-content: center;
+	flex-wrap: wrap;
 }
 
 .achieveTxtHolder {
@@ -70,6 +93,14 @@ body, textarea {
 
 	.achievePercent {
 		padding-left: 1em;
+	}
+
+	.achieveImgHolderTile {
+		/* float: left; */
+		width: 64px;
+		height: 64px;
+		/* margin: auto; */
+		padding: 0.8em;
 	}
 }
 
