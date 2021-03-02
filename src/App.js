@@ -11,9 +11,10 @@ class App extends React.Component {
 
         this.state = {
             achievements: [],
-            achievementsTiled: [],
+            achievementsBar: [],
+            achievementsTile: [],
             offset: 0,
-            perPage: 50,
+            perPage: 30,
             currentPage: 0,
             pageRangeDisplayed: 10,
             tileView: false,
@@ -23,9 +24,14 @@ class App extends React.Component {
     async getAchievements() {
         const res = await fetch(`http://localhost:8080/tf2`);
         const data = await res.json();
-        const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
-        const sliceTiled = data.slice(this.state.offset, this.state.offset + this.state.perPage);
-        const achievements = slice.map(achievement =>
+        this.setState({ achievements: data })
+        this.postAchievements();
+    }
+
+    postAchievements = () => {
+        const dataSorted = this.sortAchievements(this.state.achievements);
+        const slice = dataSorted.slice(this.state.offset, this.state.offset + this.state.perPage);
+        const achievementsBar = slice.map(achievement =>
             <GameAchievement
                 key={achievement.achievementId}
                 name={achievement.achievementName}
@@ -35,7 +41,7 @@ class App extends React.Component {
                 iconUrl={achievement.achievementIconUrl}
             />
         )
-        const achievementsTiled = sliceTiled.map(achievement =>
+        const achievementsTile = slice.map(achievement =>
             <TileAchievement
                 key={achievement.achievementId}
                 name={achievement.achievementName}
@@ -47,9 +53,9 @@ class App extends React.Component {
         )
 
         this.setState({
-            pageCount: Math.ceil(data.length / this.state.perPage),
-            achievements,
-            achievementsTiled
+            pageCount: Math.ceil(dataSorted.length / this.state.perPage),
+            achievementsBar,
+            achievementsTile,
         })
     }
 
@@ -70,134 +76,41 @@ class App extends React.Component {
             currentPage: selectedPage,
             offset: offset,
         }, () => {
-            this.getAchievements()
+            this.postAchievements();
         });
-    };
+    }
 
-    sortAchievements = () => {
-        const { achievements } = this.state;
-        const { achievementsTiled } = this.state;
+    sortAchievements = (achievements) => {
+        this.setState({ })
+        const achievementsSorted = [];
         const sel = document.getElementById("filter-select").value;
+
         if (sel === "original") {
-            this.setState({
-                achievements: achievements.sort((a, b) => a.props.id - b.props.id).map(achievement =>
-                    <GameAchievement
-                        key={achievement.props.id}
-                        name={achievement.props.name}
-                        id={achievement.props.id}
-                        description={achievement.props.description}
-                        percent={achievement.props.percent}
-                        iconUrl={achievement.props.iconUrl}
-                    />
-                ),
-                achievementsTiled: achievementsTiled.sort((a, b) => a.props.id - b.props.id).map(achievement =>
-                    <TileAchievement
-                        key={achievement.props.id}
-                        name={achievement.props.name}
-                        id={achievement.props.id}
-                        description={achievement.props.description}
-                        percent={achievement.props.percent}
-                        iconUrl={achievement.props.iconUrl}
-                    />
-                ),
-            })
+            achievements.sort((a, b) => a.achievementId - b.achievementId).map(achievement =>
+                achievementsSorted.push(achievement)
+            )
         }
         if (sel === "percent-ascending") {
-            this.setState({
-                achievements: achievements.sort((a, b) => a.props.percent - b.props.percent).map(achievement =>
-                    <GameAchievement
-                        key={achievement.props.id}
-                        name={achievement.props.name}
-                        id={achievement.props.id}
-                        description={achievement.props.description}
-                        percent={achievement.props.percent}
-                        iconUrl={achievement.props.iconUrl}
-                    />
-                ),
-                achievementsTiled: achievementsTiled.sort((a, b) => a.props.percent - b.props.percent).map(achievement =>
-                    <TileAchievement
-                        key={achievement.props.id}
-                        name={achievement.props.name}
-                        id={achievement.props.id}
-                        description={achievement.props.description}
-                        percent={achievement.props.percent}
-                        iconUrl={achievement.props.iconUrl}
-                    />
-                ),
-            })
+            achievements.sort((a, b) => a.achievementPercent - b.achievementPercent).map(achievement =>
+                achievementsSorted.push(achievement)
+            )
         }
         if (sel === "percent-descending") {
-            this.setState({
-                achievements: achievements.sort((a, b) => b.props.percent - a.props.percent).map(achievement =>
-                    <GameAchievement
-                        key={achievement.props.id}
-                        name={achievement.props.name}
-                        id={achievement.props.id}
-                        description={achievement.props.description}
-                        percent={achievement.props.percent}
-                        iconUrl={achievement.props.iconUrl}
-                    />
-                ),
-                achievementsTiled: achievementsTiled.sort((a, b) => b.props.percent - a.props.percent).map(achievement =>
-                    <TileAchievement
-                        key={achievement.props.id}
-                        name={achievement.props.name}
-                        id={achievement.props.id}
-                        description={achievement.props.description}
-                        percent={achievement.props.percent}
-                        iconUrl={achievement.props.iconUrl}
-                    />
-                ),
-            })
+            achievements.sort((a, b) => b.achievementPercent - a.achievementPercent).map(achievement =>
+                achievementsSorted.push(achievement)
+            )
         }
         if (sel === "name-ascending") {
-            this.setState({
-                achievements: achievements.sort((a, b) => a.props.name.charAt(0).toUpperCase() > b.props.name.charAt(0).toUpperCase()).map(achievement =>
-                    <GameAchievement
-                        key={achievement.props.id}
-                        name={achievement.props.name}
-                        id={achievement.props.id}
-                        description={achievement.props.description}
-                        percent={achievement.props.percent}
-                        iconUrl={achievement.props.iconUrl}
-                    />
-                ),
-                achievementsTiled: achievementsTiled.sort((a, b) => a.props.name.charAt(0).toUpperCase() > b.props.name.charAt(0).toUpperCase()).map(achievement =>
-                    <TileAchievement
-                        key={achievement.props.id}
-                        name={achievement.props.name}
-                        id={achievement.props.id}
-                        description={achievement.props.description}
-                        percent={achievement.props.percent}
-                        iconUrl={achievement.props.iconUrl}
-                    />
-                ),
-            })
+            achievements.sort((a, b) => a.achievementName.charAt(0).toUpperCase() > b.achievementName.charAt(0).toUpperCase()).map(achievement =>
+                achievementsSorted.push(achievement)
+            )
         }
         if (sel === "name-descending") {
-            this.setState({
-                achievements: achievements.sort((a, b) => a.props.name.charAt(0).toUpperCase() < b.props.name.charAt(0).toUpperCase()).map(achievement =>
-                    <GameAchievement
-                        key={achievement.props.id}
-                        name={achievement.props.name}
-                        id={achievement.props.id}
-                        description={achievement.props.description}
-                        percent={achievement.props.percent}
-                        iconUrl={achievement.props.iconUrl}
-                    />
-                ),
-                achievementsTiled: achievements.sort((a, b) => a.props.name.charAt(0).toUpperCase() < b.props.name.charAt(0).toUpperCase()).map(achievement =>
-                    <TileAchievement
-                        key={achievement.props.id}
-                        name={achievement.props.name}
-                        id={achievement.props.id}
-                        description={achievement.props.description}
-                        percent={achievement.props.percent}
-                        iconUrl={achievement.props.iconUrl}
-                    />
-                ),
-            })
+            achievements.sort((a, b) => a.achievementName.charAt(0).toUpperCase() < b.achievementName.charAt(0).toUpperCase()).map(achievement =>
+                achievementsSorted.push(achievement)
+            )
         }
+        return achievementsSorted;
     }
 
     tileCheckboxToggle = () => {
@@ -212,15 +125,15 @@ class App extends React.Component {
             if (this.state.tileView) {
                 return (
                     <div className="achieveTileContainer">
-                        {console.log("Hello Tiled return")}
-                        {this.state.achievementsTiled}
+                        {console.log("Hello Tile return")}
+                        {this.state.achievementsTile}
                     </div>
                 )
             } else {
                 return (
                     <div className="achievements-container">
                         {console.log("Hello normal return")}
-                        {this.state.achievements}
+                        {this.state.achievementsBar}
                     </div>
                 )
             }
@@ -230,7 +143,7 @@ class App extends React.Component {
             <div>
                 <div className="search-filters">
                     <label for="filter-select">Sort By:</label>
-                    <select name="filters" id="filter-select" onChange={this.sortAchievements}>
+                    <select name="filters" id="filter-select" onChange={this.postAchievements}>
                         <option value="original">Original List</option>
                         <option value="percent-ascending">% Ascending</option>
                         <option value="percent-descending">% Descending</option>
