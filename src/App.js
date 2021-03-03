@@ -86,7 +86,7 @@ class App extends React.Component {
             selected: 0,
         }, () => {
             this.handlePageChange(0);
-            this.handlePageClick ??????????????????????
+            this.handlePageClick(document.querySelector(".trigger").onClick());
             this.getAchievements();
         });
     }
