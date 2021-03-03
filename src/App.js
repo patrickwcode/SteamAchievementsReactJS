@@ -4,6 +4,7 @@ import GameAchievement from './GameAchievement';
 import TileAchievement from './TileAchievement';
 import useModal from './useModal';
 import './App.css';
+import Pagination from 'react-js-pagination';
 
 class App extends React.Component {
     constructor(props) {
@@ -19,16 +20,14 @@ class App extends React.Component {
             pageRangeDisplayed: 10,
             tileView: false,
         };
+
+        this.getAchievements = this.getAchievements.bind(this);
     }
 
     async getAchievements() {
         const res = await fetch(`http://localhost:8080/tf2`);
         const data = await res.json();
-        this.setState({ achievements: data })
-        this.postAchievements();
-    }
-
-    postAchievements = () => {
+        this.setState({ achievements: data });
         const dataSorted = this.sortAchievements(this.state.achievements);
         const slice = dataSorted.slice(this.state.offset, this.state.offset + this.state.perPage);
         const achievementsBar = slice.map(achievement =>
@@ -76,12 +75,23 @@ class App extends React.Component {
             currentPage: selectedPage,
             offset: offset,
         }, () => {
-            this.postAchievements();
+            this.getAchievements();
+        });
+    }
+
+    resetPages = () => {
+        this.setState({
+            currentPage: 0,
+            offset: 0,
+            selected: 0,
+        }, () => {
+            this.handlePageChange(0);
+            this.handlePageClick ??????????????????????
+            this.getAchievements();
         });
     }
 
     sortAchievements = (achievements) => {
-        this.setState({ })
         const achievementsSorted = [];
         const sel = document.getElementById("filter-select").value;
 
@@ -143,7 +153,7 @@ class App extends React.Component {
             <div>
                 <div className="search-filters">
                     <label for="filter-select">Sort By:</label>
-                    <select name="filters" id="filter-select" onChange={this.postAchievements}>
+                    <select name="filters" id="filter-select" onChange={this.resetPages}>
                         <option value="original">Original List</option>
                         <option value="percent-ascending">% Ascending</option>
                         <option value="percent-descending">% Descending</option>
@@ -151,7 +161,7 @@ class App extends React.Component {
                         <option value="name-descending">Name Descending</option>
                     </select>
                     <label for="tile-view-checkbox">Tile View</label>
-                    <input type="checkbox" id="tile-view-checkbox" onChange={this.tileCheckboxToggle}></input>
+                    <input type="checkbox" id="tile-view-checkbox" onChange={this.tileViewToggle}></input>
                 </div>
                 {tileViewToggle()}
                 <div>
