@@ -86,7 +86,7 @@ class App extends React.Component {
             selected: 0,
         }, () => {
             this.handlePageChange(0);
-            this.handlePageClick(document.querySelector(".trigger").onClick());
+            document.querySelector('[aria-label="Page 1"]').click();
             this.getAchievements();
         });
     }
@@ -130,19 +130,15 @@ class App extends React.Component {
 
     render() {
         const tileViewToggle = () => {
-            console.log("Hello toggle");
-            // this.setState ({ tileView: !this.state.tileView })
             if (this.state.tileView) {
                 return (
                     <div className="achieveTileContainer">
-                        {console.log("Hello Tile return")}
                         {this.state.achievementsTile}
                     </div>
                 )
             } else {
                 return (
                     <div className="achievements-container">
-                        {console.log("Hello normal return")}
                         {this.state.achievementsBar}
                     </div>
                 )
@@ -161,7 +157,7 @@ class App extends React.Component {
                         <option value="name-descending">Name Descending</option>
                     </select>
                     <label for="tile-view-checkbox">Tile View</label>
-                    <input type="checkbox" id="tile-view-checkbox" onChange={this.tileViewToggle}></input>
+                    <input type="checkbox" id="tile-view-checkbox" onChange={this.tileCheckboxToggle}></input>
                 </div>
                 {tileViewToggle()}
                 <div>
