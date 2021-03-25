@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import GameAchievement from './GameAchievement';
-import TileAchievement from './TileAchievement';
-import useModal from './useModal';
+import GameAchievementBar from './GameAchievementBar';
+import GameAchievementTile from './GameAchievementTile';
+import Modal from './Modal';
 import './App.css';
-import Pagination from 'react-js-pagination';
 
 class App extends React.Component {
     constructor(props) {
@@ -19,6 +18,7 @@ class App extends React.Component {
             currentPage: 0,
             pageRangeDisplayed: 10,
             tileView: false,
+            showModal: false,
         };
 
         this.getAchievements = this.getAchievements.bind(this);
@@ -31,7 +31,7 @@ class App extends React.Component {
         const dataSorted = this.sortAchievements(this.state.achievements);
         const slice = dataSorted.slice(this.state.offset, this.state.offset + this.state.perPage);
         const achievementsBar = slice.map(achievement =>
-            <GameAchievement
+            <GameAchievementBar
                 key={achievement.achievementId}
                 name={achievement.achievementName}
                 id={achievement.achievementId}
@@ -41,13 +41,14 @@ class App extends React.Component {
             />
         )
         const achievementsTile = slice.map(achievement =>
-            <TileAchievement
+            <GameAchievementTile
                 key={achievement.achievementId}
                 name={achievement.achievementName}
                 id={achievement.achievementId}
                 description={achievement.achievementDescription}
                 percent={achievement.achievementPercent}
                 iconUrl={achievement.achievementIconUrl}
+                showModal={this.openModal}
             />
         )
 
@@ -57,6 +58,7 @@ class App extends React.Component {
             achievementsTile,
         })
     }
+
 
     async componentDidMount() {
         this.getAchievements();
@@ -80,13 +82,17 @@ class App extends React.Component {
     }
 
     resetPages = () => {
+        // Selects first page of pagination 
+        if (this.state.currentPage !== 0) {
+            document.querySelector('[aria-label="Page 1"]').click();
+        } else {
+            document.querySelector('[aria-current="page"]').click();
+        }
         this.setState({
             currentPage: 0,
             offset: 0,
             selected: 0,
         }, () => {
-            this.handlePageChange(0);
-            document.querySelector('[aria-label="Page 1"]').click();
             this.getAchievements();
         });
     }
@@ -128,12 +134,27 @@ class App extends React.Component {
         this.setState({ tileView: checkbox });
     }
 
+    openModal = () => {
+        this.setState({ showModal: !this.state.showModal })
+    }
+
     render() {
         const tileViewToggle = () => {
             if (this.state.tileView) {
                 return (
-                    <div className="achieveTileContainer">
-                        {this.state.achievementsTile}
+                    <div>
+                        <div className="achieveTileContainer">
+                            {this.state.achievementsTile}
+                            <Modal 
+                            showModal={this.state.showModal}
+                            // key={this.state.achievementId}
+                            // name={this.props.name}
+                            // id={this.props.id}
+                            // description={this.props.description}
+                            // percent={this.props.percent}
+                            // iconUrl={this.props.iconUrl} 
+                            />
+                        </div>
                     </div>
                 )
             } else {
