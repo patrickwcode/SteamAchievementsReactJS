@@ -18,7 +18,6 @@ class App extends React.Component {
             currentPage: 0,
             pageRangeDisplayed: 10,
             tileView: false,
-            showModal: false,
         };
 
         this.getAchievements = this.getAchievements.bind(this);
@@ -145,15 +144,6 @@ class App extends React.Component {
                     <div>
                         <div className="achieveTileContainer">
                             {this.state.achievementsTile}
-                            <Modal 
-                            showModal={this.state.showModal}
-                            // key={this.state.achievementId}
-                            // name={this.props.name}
-                            // id={this.props.id}
-                            // description={this.props.description}
-                            // percent={this.props.percent}
-                            // iconUrl={this.props.iconUrl} 
-                            />
                         </div>
                     </div>
                 )

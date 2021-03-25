@@ -1,12 +1,25 @@
-import React from 'react'
+import * as React from "react";
+import { createPortal } from "react-dom";
 
-export default function Modal(props) {
+const Modal = ({ name, description, percent, iconUrl, isVisible, hideModal }) => {
 
-  return (
-    <div style={props.showModal ? { display: 'block' } : { display: 'none' }}>
-      <button>X</button>
-      <h1>NAME HERE</h1>
-      <p>DESCRIPTION</p>
-    </div>
+  return isVisible
+  ? createPortal(
+    <div>
+      <div>
+        <h5>{name}</h5>
+        <h4>{percent}</h4>
+        <span>
+          {description}
+        </span>
+      </div>
+      <button onClick={hideModal}>
+        Close
+      </button>
+    </div>,
+    document.body,
   )
-}
+  : null;
+};
+
+export default Modal;
