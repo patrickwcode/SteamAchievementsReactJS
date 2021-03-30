@@ -1,19 +1,20 @@
 import * as React from "react";
 import { createPortal } from "react-dom";
+import './Modal.css';
 
 const Modal = ({ name, description, percent, iconUrl, isVisible, hideModal }) => {
 
   return isVisible
   ? createPortal(
-    <div>
-      <div>
-        <h5>{name}</h5>
-        <h4>{percent}</h4>
+    <div class="modal">
+      <div class="content">
+        <h1>{name}</h1>
+        <h2>{percent}</h2>
         <span>
           {description}
         </span>
       </div>
-      <button onClick={hideModal}>
+      <button class="close" onClick={hideModal}>
         Close
       </button>
     </div>,
