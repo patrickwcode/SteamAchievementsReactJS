@@ -8,14 +8,15 @@ const Modal = ({ name, description, percent, iconUrl, isVisible, hideModal }) =>
   ? createPortal(
     <div class="modal">
       <div class="content">
+        <img class="icon" src={iconUrl} alt={name} width="80px" height="80px"/>
         <h1>{name}</h1>
-        <h2>{percent}</h2>
-        <span>
+        <h1>{Math.round(10*percent)/10}%</h1>
+        <h4>
           {description}
-        </span>
+        </h4>
       </div>
       <button class="close" onClick={hideModal}>
-        Close
+        X
       </button>
     </div>,
     document.body,

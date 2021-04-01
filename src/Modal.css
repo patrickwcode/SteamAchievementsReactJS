@@ -1,20 +1,31 @@
 .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: fixed;
     z-index: 1;
-    left: 13%;
-    top: 20%;
-    padding: 10px;
-    width: 70%;
-    height: 70%;
-    overflow: auto;
-    background-color: red;
+    left: 7.5%;
+    top: 28%;
+    padding: 1em;
+    width: 80%;
+    height: 50%;
+    background-color: #17435c;
+    opacity: 0.95;
+    text-align: center;
+    margin: auto;
+    border: 1px solid #C6D4DF;
+    color: #C6D4DF;
 }
-.content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+
+.modal h1 {
+    margin: 0.5em 0;
+    color: #C6D4DF;
+}
+
+.icon {
+    margin: 0.5em 0;
+}
+
+.close {
+    position: absolute;
+    left: 90%;
+    top: 0%;
+    font-size: 1.5em;
 }

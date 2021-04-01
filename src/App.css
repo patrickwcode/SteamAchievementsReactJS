@@ -12,8 +12,8 @@ body, textarea {
 
 .achieveImgHolderTile {
 	/* float: left; */
-	width: 64px;
-	height: 64px;
+	width: 80px;
+	height: 80px;
 	/* margin: auto; */
 	padding: 0.8em;
 }
@@ -33,7 +33,7 @@ body, textarea {
 }
 
 .achieveTileContainer {
-	width: 65%;
+	width: 60%;
 	display: flex;
 	margin: auto;
 	justify-content: center;
@@ -95,12 +95,12 @@ body, textarea {
 		padding-left: 1em;
 	}
 
-	.achieveImgHolderTile {
-		/* float: left; */
-		width: 64px;
-		height: 64px;
-		/* margin: auto; */
-		padding: 0.8em;
+	.achieveTileContainer {
+		width: 100%;
+		display: flex;
+		margin: auto;
+		justify-content: center;
+		flex-wrap: wrap;
 	}
 }
 
@@ -108,6 +108,7 @@ body, textarea {
 	align-items: center;
 	justify-content: center;
 	margin: 15px auto;
+	padding: 0;
 	display: flex;
 	list-style: none;
 	outline: none;
