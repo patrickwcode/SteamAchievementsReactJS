@@ -120,7 +120,7 @@ article {
     width: 100%;
   }
 
-  #achievements-container {
+  .achievements-container {
     width: 100%;
     padding: 0;
     background-color:#111923;

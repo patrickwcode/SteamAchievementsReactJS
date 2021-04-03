@@ -1,15 +1,14 @@
 .modal {
     position: fixed;
     z-index: 1;
-    left: 7.5%;
-    top: 28%;
-    padding: 1em;
+    left: 0;
+    right: 0;
+    top: 20%;
+    margin: auto;
     width: 80%;
-    height: 50%;
     background-color: #17435c;
     opacity: 0.95;
     text-align: center;
-    margin: auto;
     border: 1px solid #C6D4DF;
     color: #C6D4DF;
 }
@@ -20,12 +19,10 @@
 }
 
 .icon {
-    margin: 0.5em 0;
+    margin: 0.5em 0em 0.5em 1.5em;
 }
 
 .close {
-    position: absolute;
-    left: 90%;
-    top: 0%;
-    font-size: 1.5em;
+    float: right;
+    font-size: 2em;
 }
