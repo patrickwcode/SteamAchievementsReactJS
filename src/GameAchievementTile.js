@@ -11,6 +11,7 @@ export default function GameAchievementTile(props) {
             <div className="achieveImgHolderTile">
                 <img src={props.iconUrl}
                     alt={props.name} width="80px" height="80px" onClick={toggleModal} />
+                {props.name}
                 <Modal name={props.name} description={props.description} percent={props.percent} iconUrl={props.iconUrl} isVisible={isVisible} hideModal={toggleModal} />
             </div>
         </div>

@@ -4,16 +4,31 @@ import './Modal.css';
 
 const Modal = ({ name, description, percent, iconUrl, isVisible, hideModal }) => {
 
+  function clickOffModal() {
+    var modal = document.getElementById("modal");
+    window.onclick = (event) => {
+      if (event.target === modal) {
+        hideModal();
+      }
+    }
+  }
+
   return isVisible
     ? createPortal(
-      <div class="modal">
-        <button class="close" onClick={hideModal}>
-          X
-        </button>
-        <div class="content">
-          <img class="icon" src={iconUrl} alt={name} width="80px" height="80px" />
-          <h1>{name}</h1>
-          <h1>{Math.round(10 * percent) / 10}%</h1>
+      <div className="modal" id="modal" onClick={clickOffModal}>
+        <div className="modal-content">
+          <button className="close" onClick={hideModal}>
+            X
+          </button>
+          <img className="icon" src={iconUrl} alt={name} width="80px" height="80px" />
+          <h2>{name}</h2>
+          <div className="percentBar">
+            <div className="percentBarFill" style={{ width: `${percent}%` }}>
+            </div>
+            <div className="percentText">
+              {Math.round(10 * percent) / 10}%
+            </div>
+          </div>
           <h4>
             {description}
           </h4>

@@ -1,28 +1,73 @@
 .modal {
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    right: 0;
-    top: 20%;
-    margin: auto;
-    width: 80%;
-    background-color: #17435c;
-    opacity: 0.95;
-    text-align: center;
-    border: 1px solid #C6D4DF;
-    color: #C6D4DF;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
 }
 
-.modal h1 {
-    margin: 0.5em 0;
-    color: #C6D4DF;
+.modal-content {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 30%;
+  width: 80%;
+  color: #c6d4df;
+  background-color: rgb(23, 67, 92, 0.9);
+  border: 1px solid #c6d4df;
+  margin: auto;
+}
+
+.modal-content h2 {
+  margin: 0.5em 0 0.5em 0;
+  color: #c6d4df;
+}
+
+.modal-content h4 {
+  color: #a9b6c0;
+  padding: 0.4em;
+  margin: 0.5em 0 0.5em 0;
+}
+
+.percentBar {
+  position: relative;
+  border: 2px solid #67c1f5;
+  padding: 4px;
+  overflow: hidden;
+  width: 50%;
+  height: 1.5em;
+  margin: auto;
+}
+
+.percentBarFill {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  background: #67c1f5;
+}
+
+.percentText {
+  position: relative;
+  float: right;
+  padding-top: 2px;
+  color: #67c1f5;
 }
 
 .icon {
-    margin: 0.5em 0em 0.5em 1.5em;
+  margin: 0.5em 0em 0em 2em;
 }
 
 .close {
-    float: right;
-    font-size: 2em;
+  float: right;
+  font-size: 1.8em;
+}
+
+@media screen and (max-width: 856px) {
+  .modal-content {
+    top: 15%;
+  }
 }

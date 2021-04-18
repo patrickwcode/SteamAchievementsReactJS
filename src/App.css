@@ -1,137 +1,144 @@
-body, textarea {
-	font-family: Arial, Helvetica, Verdana, sans-serif;
-	background-color: #1b2838;
+body,
+textarea {
+  font-family: Arial, Helvetica, Verdana, sans-serif;
+  background-color: #1b2838;
 }
 
 .achieveImgHolder {
-	float: left;
-	width:64px;
-	height:64px;
-    padding:1px 10px 1px 0px;
+  float: left;
+  width: 64px;
+  height: 64px;
+  padding: 1px 10px 1px 0px;
 }
 
 .achieveImgHolderTile {
-	/* float: left; */
-	width: 80px;
-	height: 80px;
-	/* margin: auto; */
-	padding: 0.8em;
+  /* float: left; */
+  width: 80px;
+  height: 80px;
+  /* margin: auto; */
+  padding: 0.8em;
+  margin-bottom: 5em;
+  text-align: center;
 }
 
 .achieveRow {
-	width: 55%;
-	margin: auto;
-	padding: 0.5em 1em 0.5em 1em;
-	background-color:#111923;
+  width: 55%;
+  margin: auto;
+  padding: 0.5em 1em 0.5em 1em;
+  background-color: #111923;
 }
 
 .achieveRowTile {
-	/* margin: auto; */
-	/* padding: 1em; */
-	background-color:#111923;
-	/* border: solid red 1px; */
+  /* margin: auto; */
+  /* padding: 1em; */
+  background-color: #111923;
+  /* border: solid red 1px; */
 }
 
 .achieveTileContainer {
-	width: 60%;
-	display: flex;
-	margin: auto;
-	justify-content: center;
-	flex-wrap: wrap;
+  width: 60%;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .achieveTxtHolder {
-	position: relative;
-	border: 1px solid #17435c;
-	padding: 1px;
-	overflow: hidden;
+  position: relative;
+  border: 1px solid #17435c;
+  padding: 1px;
+  overflow: hidden;
 }
 
 .achieveFill {
-	position:absolute;
-	top:2px;
-	left:2px;
-	bottom: 2px;
-	z-index: 10;
-	background: #17435c;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  z-index: 10;
+  background: #17435c;
 }
 
 .achieveTxt {
-	position:relative;
-	padding: 6px 6px 0px 6px;
-	z-index:40;
+  position: relative;
+  padding: 6px 6px 0px 6px;
+  z-index: 40;
 }
 
 .achievePercent {
-	float: right;
-	position: relative;
-	margin-top:27px;
-	margin-right: 20px;
-	color:#66C0F4;
-	font-size:13px;
-	z-index:40;
+  float: right;
+  position: relative;
+  margin-top: 27px;
+  margin-right: 20px;
+  color: #66c0f4;
+  font-size: 13px;
+  z-index: 40;
 }
 
 .achieveTxt h3 {
-	margin: 5px 5px 0px 5px;
-	font-weight:normal;
-	font-size:18px;
-	color: #C6D4DF;
+  margin: 5px 5px 0px 5px;
+  font-weight: normal;
+  font-size: 18px;
+  color: #c6d4df;
 }
 
 .achieveTxt h5 {
-	margin: 0px 5px 5px 5px;
-	font-weight:normal;
-	font-size:14px;
-	color: #8F98A0;
-}
-
-@media screen and (max-width: 856px) {
-	.achieveRow {
-		width: 100%;
-	}
-
-	.achievePercent {
-		padding-left: 1em;
-	}
-
-	.achieveTileContainer {
-		width: 100%;
-		display: flex;
-		margin: auto;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
+  margin: 0px 5px 5px 5px;
+  font-weight: normal;
+  font-size: 14px;
+  color: #8f98a0;
 }
 
 .pagination {
-	align-items: center;
-	justify-content: center;
-	margin: 15px auto;
-	padding: 0;
-	display: flex;
-	list-style: none;
-	outline: none;
+  display: flex;
+  justify-content: center;
+  margin: 15px auto;
+  padding: 0;
+  list-style: none;
+  outline: none;
+}
+.pagination > .active > a {
+  background-color: #47ccde;
+  border-color: #47ccde;
+  color: #fff;
+}
+.pagination > li > a {
+  border: 1px solid #47ccde;
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: #47ccde;
+  border-color: #47ccde;
+  outline: none;
+}
+.pagination > li > a,
+.pagination > li > span {
+  color: #47ccde;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span,
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-radius: unset;
+}
+
+@media screen and (max-width: 856px) {
+  .achieveRow {
+    width: 100%;
   }
-  .pagination > .active > a{
-	background-color: #47ccde ;
-	border-color: #47ccde ;
-	color: #fff;
+
+  .achievePercent {
+    padding-left: 1em;
   }
-  .pagination > li > a{
-	border: 1px solid #47ccde ;
-	padding: 5px 10px;
-	outline: none;
-	cursor: pointer;
+
+  .achieveTileContainer {
+    width: 100%;
   }
-  .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
-	background-color: #47ccde ;
-	border-color: #47ccde;
-	outline: none ;
-  }
-  .pagination > li > a, .pagination > li > span{
-	color: #47ccde
-  }
-  .pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
-	border-radius: unset
-  }
+}

@@ -16,7 +16,7 @@ class App extends React.Component {
             offset: 0,
             perPage: 30,
             currentPage: 0,
-            pageRangeDisplayed: 10,
+            pageRangeDisplayed: 8,
             tileView: false,
         };
 
@@ -179,7 +179,7 @@ class App extends React.Component {
                         breakClassName={"break-me"}
                         pageCount={this.state.pageCount}
                         marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
+                        pageRangeDisplayed={3}
                         onPageChange={this.handlePageClick}
                         containerClassName={"pagination"}
                         subContainerClassName={"pages pagination"}
