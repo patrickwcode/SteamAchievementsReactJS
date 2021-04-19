@@ -11,28 +11,11 @@ textarea {
   padding: 1px 10px 1px 0px;
 }
 
-.achieveImgHolderTile {
-  /* float: left; */
-  width: 80px;
-  height: 80px;
-  /* margin: auto; */
-  padding: 0.8em;
-  margin-bottom: 5em;
-  text-align: center;
-}
-
 .achieveRow {
   width: 55%;
   margin: auto;
   padding: 0.5em 1em 0.5em 1em;
   background-color: #111923;
-}
-
-.achieveRowTile {
-  /* margin: auto; */
-  /* padding: 1em; */
-  background-color: #111923;
-  /* border: solid red 1px; */
 }
 
 .achieveTileContainer {
@@ -42,6 +25,20 @@ textarea {
   justify-content: center;
   flex-wrap: wrap;
 }
+
+.achieveRowTile {
+  background-color: #111923;
+}
+
+.achieveImgHolderTile {
+	/* float: left; */
+	width: 80px;
+	height: 80px;
+	/* margin: auto; */
+	padding: 0.8em;
+	margin-bottom: 5em;
+	text-align: center;
+  }
 
 .achieveTxtHolder {
   position: relative;
@@ -140,5 +137,19 @@ textarea {
 
   .achieveTileContainer {
     width: 100%;
+  }
+}
+
+.fade-in {
+  opacity: 1;
+  animation: fadeIn 0.5s linear;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

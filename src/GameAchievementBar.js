@@ -3,7 +3,7 @@ import React from 'react';
 export default function GameAchievementBar(props) {
   return (
     <div>
-      <div className="achieveRow">
+      <div className="achieveRow fade-in">
         <div className="achieveImgHolder">
           <img src={props.iconUrl}
             alt={props.name} width="64" height="64" border="0" />

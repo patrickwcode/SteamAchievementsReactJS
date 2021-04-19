@@ -7,6 +7,17 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   text-align: center;
+  opacity: 1;
+  animation: fadeIn 0.3s linear;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .modal-content {
@@ -48,7 +59,18 @@
   left: 2px;
   bottom: 2px;
   background: #67c1f5;
+  opacity: 1;
+  animation: scale 1s linear;
 }
+
+/* @keyframes scale {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+} */
 
 .percentText {
   position: relative;
