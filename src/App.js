@@ -27,7 +27,6 @@ class App extends React.Component {
     }
 
     async getAchievements(appId) {
-        console.log("hello from achievements");
         const res = await fetch(`http://localhost:10000/achievements?id=${appId}`);
         const data = await res.json();
         this.setState({ achievements: data });
@@ -79,20 +78,29 @@ class App extends React.Component {
     }
 
     getAppIdByGameName() {
-
         // If search bar is empty, keep name and image up.
         // If full name is typed out, do not load achievements until clicking game image.
+        let input = document.getElementById("search-bar");
+        let timeout = null;
 
-        let gameName = document.getElementById("search-bar").value.toLowerCase();
-        Object.entries(this.state.appList).forEach(([key, value]) => {
-            if (gameName === value.name.toLowerCase() + '') {
-                this.setState({
-                    appId: value.appid,
-                    appName: value.name,
+        // When user stops typing for 600ms, search for game.
+        input.addEventListener('keyup', (e) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                let gameName = input.value.toLowerCase();
+                Object.entries(this.state.appList).forEach(([key, value]) => {
+                    if (gameName === value.name.toLowerCase() + '') {
+                        this.setState({
+                            appId: value.appid,
+                            appName: value.name,
+                        })
+                        this.getAchievements(value.appid);
+                    }
                 })
-                this.getAchievements(value.appid);
-            }
+            }, 500);
         })
+
+
     }
 
     async componentDidMount() {
