@@ -126,7 +126,7 @@ textarea {
   border-radius: unset;
 }
 
-@media screen and (max-width: 856px) {
+@media screen and (max-width: 1000px) {
   .achieveRow {
     width: 100%;
   }
