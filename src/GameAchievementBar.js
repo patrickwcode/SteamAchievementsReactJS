@@ -11,10 +11,10 @@ export default function GameAchievementBar(props) {
         <div className="achieveTxtHolder">
           <div className="achieveFill" style={{ width: `${props.percent}%` }}>
           </div>
-          <div className="achievePercent">{Math.round(10*props.percent)/10}%</div>
+          <div className="achievePercent">{Math.round(10 * props.percent) / 10}%</div>
           <div className="achieveTxt">
             <h3>{props.name}</h3>
-            <h5>{props.description}
+            <h5>{props.description ? props.description : props.name}
             </h5>
           </div>
         </div>

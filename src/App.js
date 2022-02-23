@@ -10,7 +10,7 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            appId: 550,
+            appId: 440,
             achievements: [],
             achievementsBar: [],
             achievementsTile: [],
@@ -79,6 +79,10 @@ class App extends React.Component {
     }
 
     getAppIdByGameName() {
+
+        // If search bar is empty, keep name and image up.
+        // If full name is typed out, do not load achievements until clicking game image.
+
         let gameName = document.getElementById("search-bar").value.toLowerCase();
         Object.entries(this.state.appList).forEach(([key, value]) => {
             if (gameName === value.name.toLowerCase() + '') {
@@ -190,7 +194,7 @@ class App extends React.Component {
                             <input id="search-bar"
                                 type="text"
                                 placeholder="Search Games..."
-                                onChange={(e) => { this.getAppIdByGameName(e) }}>
+                                onChange={() => { this.getAppIdByGameName() }}>
                             </input>
                         </div>
                         <div className="game-info">
