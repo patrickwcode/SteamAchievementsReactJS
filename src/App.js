@@ -24,29 +24,29 @@ class App extends React.Component {
     }
 
     async getAchievements() {
-        const res = await fetch(`http://localhost:8080/tf2`);
+        const res = await fetch(`http://localhost:10000/achievements?id=440`);
         const data = await res.json();
         this.setState({ achievements: data });
         const dataSorted = this.sortAchievements(this.state.achievements);
         const slice = dataSorted.slice(this.state.offset, this.state.offset + this.state.perPage);
         const achievementsBar = slice.map(achievement =>
             <GameAchievementBar
-                key={achievement.achievementId}
-                name={achievement.achievementName}
-                id={achievement.achievementId}
-                description={achievement.achievementDescription}
-                percent={achievement.achievementPercent}
-                iconUrl={achievement.achievementIconUrl}
+                key={achievement.id}
+                name={achievement.name}
+                id={achievement.id}
+                description={achievement.description}
+                percent={achievement.percent}
+                iconUrl={achievement.iconUrl}
             />
         )
         const achievementsTile = slice.map(achievement =>
             <GameAchievementTile
-                key={achievement.achievementId}
-                name={achievement.achievementName}
-                id={achievement.achievementId}
-                description={achievement.achievementDescription}
-                percent={achievement.achievementPercent}
-                iconUrl={achievement.achievementIconUrl}
+                key={achievement.id}
+                name={achievement.name}
+                id={achievement.id}
+                description={achievement.description}
+                percent={achievement.percent}
+                iconUrl={achievement.iconUrl}
                 showModal={this.openModal}
             />
         )
@@ -101,27 +101,27 @@ class App extends React.Component {
         const sel = document.getElementById("filter-select").value;
 
         if (sel === "original") {
-            achievements.sort((a, b) => a.achievementId - b.achievementId).map(achievement =>
+            achievements.sort((a, b) => a.id - b.id).map(achievement =>
                 achievementsSorted.push(achievement)
             )
         }
         if (sel === "percent-ascending") {
-            achievements.sort((a, b) => a.achievementPercent - b.achievementPercent).map(achievement =>
+            achievements.sort((a, b) => a.percent - b.percent).map(achievement =>
                 achievementsSorted.push(achievement)
             )
         }
         if (sel === "percent-descending") {
-            achievements.sort((a, b) => b.achievementPercent - a.achievementPercent).map(achievement =>
+            achievements.sort((a, b) => b.percent - a.percent).map(achievement =>
                 achievementsSorted.push(achievement)
             )
         }
         if (sel === "name-ascending") {
-            achievements.sort((a, b) => a.achievementName.charAt(0).toUpperCase() > b.achievementName.charAt(0).toUpperCase()).map(achievement =>
+            achievements.sort((a, b) => a.name.charAt(0).toUpperCase() > b.name.charAt(0).toUpperCase()).map(achievement =>
                 achievementsSorted.push(achievement)
             )
         }
         if (sel === "name-descending") {
-            achievements.sort((a, b) => a.achievementName.charAt(0).toUpperCase() < b.achievementName.charAt(0).toUpperCase()).map(achievement =>
+            achievements.sort((a, b) => a.name.charAt(0).toUpperCase() < b.name.charAt(0).toUpperCase()).map(achievement =>
                 achievementsSorted.push(achievement)
             )
         }
