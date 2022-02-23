@@ -10,7 +10,7 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            appId: 440,
+            appId: 550,
             achievements: [],
             achievementsBar: [],
             achievementsTile: [],
@@ -73,6 +73,7 @@ class App extends React.Component {
                 appName = value.name + '';
             }
         })
+
         this.setState({
             appList: appsSorted,
             appName: appName
@@ -186,7 +187,7 @@ class App extends React.Component {
                                 <h3>{this.state.appName}</h3>
                             </div>
                             <div className="game-image-container">
-                                <img src={`https://steamcdn-a.akamaihd.net/steam/apps/${this.state.appId}aa/capsule_184x69.jpg`} alt={this.state.appName} />
+                                <img src={`https://steamcdn-a.akamaihd.net/steam/apps/${this.state.appId}/capsule_184x69.jpg`} alt={this.state.appName} />
                             </div>
                         </div>
                     </article>
