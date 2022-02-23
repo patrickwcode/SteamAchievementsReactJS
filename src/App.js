@@ -10,9 +10,12 @@ class App extends React.Component {
         super(props);
 
         this.state = {
+            appId: 440,
             achievements: [],
             achievementsBar: [],
             achievementsTile: [],
+            appList: [],
+            appName: "Team Fortress 2",
             offset: 0,
             perPage: 30,
             currentPage: 0,
@@ -24,7 +27,7 @@ class App extends React.Component {
     }
 
     async getAchievements() {
-        const res = await fetch(`http://localhost:10000/achievements?id=440`);
+        const res = await fetch(`http://localhost:10000/achievements?id=${this.state.appId}`);
         const data = await res.json();
         this.setState({ achievements: data });
         const dataSorted = this.sortAchievements(this.state.achievements);
@@ -58,13 +61,30 @@ class App extends React.Component {
         })
     }
 
+    async getAppList() {
+        let appsSorted = [];
+        let appName;
+        const res = await fetch(`http://localhost:10000/appList`);
+        const data = await res.json();
+
+        // Gets name of game with appId
+        Object.entries(data).forEach(([key, value]) => {
+            if (value.appid === this.state.appId) {
+                appName = value.name + '';
+            }
+        })
+        this.setState({
+            appList: appsSorted,
+            appName: appName
+        });
+    }
 
     async componentDidMount() {
-        this.getAchievements();
+        this.getAchievements(this.state.appId);
+        this.getAppList();
     }
 
     handlePageChange(pageNumber) {
-        console.log(`active page is ${pageNumber}`);
         this.setState({ activePage: pageNumber });
     }
 
@@ -76,7 +96,7 @@ class App extends React.Component {
             currentPage: selectedPage,
             offset: offset,
         }, () => {
-            this.getAchievements();
+            this.getAchievements(this.state.appId);
         });
     }
 
@@ -99,12 +119,6 @@ class App extends React.Component {
     sortAchievements = (achievements) => {
         const achievementsSorted = [];
         const sel = document.getElementById("filter-select").value;
-
-        if (sel === "original") {
-            achievements.sort((a, b) => a.id - b.id).map(achievement =>
-                achievementsSorted.push(achievement)
-            )
-        }
         if (sel === "percent-ascending") {
             achievements.sort((a, b) => a.percent - b.percent).map(achievement =>
                 achievementsSorted.push(achievement)
@@ -158,12 +172,30 @@ class App extends React.Component {
 
         return (
             <div>
+                <section>
+                    <article>
+                        <div className="search-container">
+                            <input id="search-bar"
+                                type="text"
+                                placeholder="Search Games...">
+                            </input>
+                        </div>
+                        <div className="game-info">
+                            <div className="subtitle">
+                                <h2>Global Gameplay Stats</h2>
+                                <h3>{this.state.appName}</h3>
+                            </div>
+                            <div className="game-image-container">
+                                <img src={`https://steamcdn-a.akamaihd.net/steam/apps/${this.state.appId}aa/capsule_184x69.jpg`} alt={this.state.appName} />
+                            </div>
+                        </div>
+                    </article>
+                </section>
                 <div className="search-filters">
                     <label for="filter-select">Sort By:</label>
                     <select name="filters" id="filter-select" onChange={this.resetPages}>
-                        <option value="original">Original List</option>
-                        <option value="percent-ascending">% Ascending</option>
                         <option value="percent-descending">% Descending</option>
+                        <option value="percent-ascending">% Ascending</option>
                         <option value="name-ascending">Name Ascending</option>
                         <option value="name-descending">Name Descending</option>
                     </select>
