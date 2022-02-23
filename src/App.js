@@ -26,8 +26,9 @@ class App extends React.Component {
         this.getAchievements = this.getAchievements.bind(this);
     }
 
-    async getAchievements() {
-        const res = await fetch(`http://localhost:10000/achievements?id=${this.state.appId}`);
+    async getAchievements(appId) {
+        console.log("hello from achievements");
+        const res = await fetch(`http://localhost:10000/achievements?id=${appId}`);
         const data = await res.json();
         this.setState({ achievements: data });
         const dataSorted = this.sortAchievements(this.state.achievements);
@@ -53,7 +54,6 @@ class App extends React.Component {
                 showModal={this.openModal}
             />
         )
-
         this.setState({
             pageCount: Math.ceil(dataSorted.length / this.state.perPage),
             achievementsBar,
@@ -76,6 +76,19 @@ class App extends React.Component {
             appList: data,
             appName: appName
         });
+    }
+
+    getAppIdByGameName() {
+        let gameName = document.getElementById("search-bar").value.toLowerCase();
+        Object.entries(this.state.appList).forEach(([key, value]) => {
+            if (gameName === value.name.toLowerCase() + '') {
+                this.setState({
+                    appId: value.appid,
+                    appName: value.name,
+                })
+                this.getAchievements(value.appid);
+            }
+        })
     }
 
     async componentDidMount() {
@@ -176,7 +189,8 @@ class App extends React.Component {
                         <div className="search-container">
                             <input id="search-bar"
                                 type="text"
-                                placeholder="Search Games...">
+                                placeholder="Search Games..."
+                                onChange={(e) => { this.getAppIdByGameName(e) }}>
                             </input>
                         </div>
                         <div className="game-info">
@@ -216,7 +230,7 @@ class App extends React.Component {
                         subContainerClassName={"pages pagination"}
                         activeClassName={"active"} />
                 </div>
-            </div>
+            </div >
         );
     }
 }
