@@ -26,6 +26,12 @@ class App extends React.Component {
         this.getAchievements = this.getAchievements.bind(this);
     }
 
+    async componentDidMount() {
+        this.timeout = null;
+        this.getAchievements(this.state.appId);
+        this.getAppList();
+    }
+
     async getAchievements(appId) {
         const res = await fetch(`http://localhost:10000/achievements?id=${appId}`);
         const data = await res.json();
@@ -61,51 +67,32 @@ class App extends React.Component {
     }
 
     async getAppList() {
-        let appName;
         const res = await fetch(`http://localhost:10000/appList`);
         const data = await res.json();
-
-        // Gets name of game with appId
-        Object.entries(data).forEach(([key, value]) => {
-            if (value.appid === this.state.appId) {
-                appName = value.name + '';
-            }
-        })
+        const appIdString = `${this.state.appId}`
         this.setState({
             appList: data,
-            appName: appName
         });
     }
 
-    getAppIdByGameName() {
-        // If search bar is empty, keep name and image up.
-        // If full name is typed out, do not load achievements until clicking game image.
-        let input = document.getElementById("search-bar");
-        let timeout = null;
+    getIdByApp() {
+        const input = document.getElementById("search-bar");
 
-        // When user stops typing for 600ms, search for game.
         input.addEventListener('keyup', (e) => {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => {
-                let gameName = input.value.toLowerCase();
-                Object.entries(this.state.appList).forEach(([key, value]) => {
-                    if (gameName === value.name.toLowerCase() + '') {
-                        this.setState({
-                            appId: value.appid,
-                            appName: value.name,
-                        })
-                        this.getAchievements(value.appid);
-                    }
-                })
-            }, 500);
+            clearTimeout(this.timeout);
+            this.timeout = setTimeout(() => {
+                const appName = input.value;
+                if (this.state.appList[appName]) {
+                    const appId = this.state.appList[appName];
+                    this.setState({
+                        appId: appId,
+                        appName: appName,
+                    })
+                    this.getAchievements(appId);
+                }
+            }
+                , 800);
         })
-
-
-    }
-
-    async componentDidMount() {
-        this.getAchievements(this.state.appId);
-        this.getAppList();
     }
 
     handlePageChange(pageNumber) {
@@ -136,7 +123,7 @@ class App extends React.Component {
             offset: 0,
             selected: 0,
         }, () => {
-            this.getAchievements();
+            this.getAchievements(this.state.appId);
         });
     }
 
@@ -202,7 +189,7 @@ class App extends React.Component {
                             <input id="search-bar"
                                 type="text"
                                 placeholder="Search Games..."
-                                onChange={() => { this.getAppIdByGameName() }}>
+                                onChange={() => { this.getIdByApp() }}>
                             </input>
                         </div>
                         <div className="game-info">
