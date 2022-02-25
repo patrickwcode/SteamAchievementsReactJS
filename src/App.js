@@ -12,8 +12,8 @@ class App extends React.Component {
         this.state = {
             appId: 440,
             achievements: [],
-            achievementsBar: [],
-            achievementsTile: [],
+            achievementBars: [],
+            achievementTiles: [],
             appList: [],
             appName: "Team Fortress 2",
             offset: 0,
@@ -21,24 +21,43 @@ class App extends React.Component {
             currentPage: 0,
             pageRangeDisplayed: 8,
             tileView: false,
+            hasAchievements: true
         };
 
         this.getAchievements = this.getAchievements.bind(this);
     }
 
     async componentDidMount() {
-        this.timeout = null;
+        this.timeoutController = null;
+        this.timeoutGetId = null;
         this.getAchievements(this.state.appId);
         this.getAppList();
     }
 
     async getAchievements(appId) {
-        const res = await fetch(`http://localhost:10000/achievements?id=${appId}`);
-        const data = await res.json();
-        this.setState({ achievements: data });
+        // AbortController aborts the fetch after 5s.
+        let data = null;
+        const controller = new AbortController();
+        this.timeoutController = setTimeout(() => controller.abort(), 2500);
+
+        await fetch(`http://localhost:10000/achievements?id=${appId}`,
+            { signal: controller.signal })
+            .then(response => response.json())
+            .then(json => data = json)
+            .catch(err => console.log('Request Failed', err));
+
+        if (data === null) {
+            this.setState({
+                hasAchievements: false,
+                pageRangeDisplayed: 0});
+        } else {
+            this.setState({
+                achievements: data,
+                hasAchievements: true});
+        }
         const dataSorted = this.sortAchievements(this.state.achievements);
         const slice = dataSorted.slice(this.state.offset, this.state.offset + this.state.perPage);
-        const achievementsBar = slice.map(achievement =>
+        const achievementBars = slice.map(achievement =>
             <GameAchievementBar
                 key={achievement.id}
                 name={achievement.name}
@@ -48,7 +67,7 @@ class App extends React.Component {
                 iconUrl={achievement.iconUrl}
             />
         )
-        const achievementsTile = slice.map(achievement =>
+        const achievementTiles = slice.map(achievement =>
             <GameAchievementTile
                 key={achievement.id}
                 name={achievement.name}
@@ -61,8 +80,8 @@ class App extends React.Component {
         )
         this.setState({
             pageCount: Math.ceil(dataSorted.length / this.state.perPage),
-            achievementsBar,
-            achievementsTile,
+            achievementBars,
+            achievementTiles,
         })
     }
 
@@ -79,18 +98,20 @@ class App extends React.Component {
         const appName = input.value.toLowerCase();
 
         input.addEventListener('keyup', (e) => {
-            clearTimeout(this.timeout);
+            clearTimeout(this.timeoutGetId);
 
             // If user deletes search, content will not disappear and make another API call.
             if (input.value === "" || input.value === this.state.appName.toLowerCase()) {
                 return
             } else {
-                this.timeout = setTimeout(() => {
+                this.timeoutGetId = setTimeout(() => {
                     if (this.state.appList[appName]) {
                         const app = this.state.appList[appName];
                         this.setState({
                             appId: app.appid,
                             appName: app.name,
+                            achievementBars: [],
+                            achievementTiles: [],
                         })
                         this.getAchievements(app.appid);
                     }
@@ -169,32 +190,39 @@ class App extends React.Component {
 
     render() {
         const tileViewToggle = () => {
-            if (this.state.tileView) {
-                return (
-                    <div>
-                        <div className="achieveTileContainer">
-                            {this.state.achievementsTile}
+            if (this.state.hasAchievements) {
+                if (this.state.tileView) {
+                    return (
+                        <div>
+                            <div className="achieveTileContainer">
+                                {this.state.achievementTiles}
+                            </div>
                         </div>
-                    </div>
-                )
+                    )
+                } else {
+                    return (
+                        <div className="achievements-container">
+                            {this.state.achievementBars}
+                        </div>
+                    )
+                }
             } else {
                 return (
-                    <div className="achievements-container">
-                        {this.state.achievementsBar}
+                    <div className="fade-in">
+                        <h1>No Achievements Found</h1>
                     </div>
                 )
             }
         }
-
         return (
             <div>
                 <section>
                     <article>
                         <div className="search-container">
                             <input id="search-bar"
-                                type="text"
-                                placeholder="Search Games..."
-                                onChange={() => { this.getIdByApp() }}>
+                                   type="text"
+                                   placeholder="Search Games..."
+                                   onChange={() => { this.getIdByApp() }}>
                             </input>
                         </div>
                         <div className="game-info">
@@ -217,23 +245,25 @@ class App extends React.Component {
                         <option value="name-descending">Name Descending</option>
                     </select>
                     <label for="tile-view-checkbox">Tile View</label>
-                    <input type="checkbox" id="tile-view-checkbox" onChange={this.tileCheckboxToggle}></input>
+                    <input type="checkbox" id="tile-view-checkbox" onChange={this.tileCheckboxToggle}/>
                 </div>
                 {tileViewToggle()}
-                <div>
-                    <ReactPaginate
-                        previousLabel={"prev"}
-                        nextLabel={"next"}
-                        breakLabel={"..."}
-                        breakClassName={"break-me"}
-                        pageCount={this.state.pageCount}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={3}
-                        onPageChange={this.handlePageClick}
-                        containerClassName={"pagination"}
-                        subContainerClassName={"pages pagination"}
-                        activeClassName={"active"} />
-                </div>
+                {/*Show Pagination if there are Achievements*/}
+                {this.state.hasAchievements ?
+                    <div>
+                        <ReactPaginate
+                            previousLabel={"prev"}
+                            nextLabel={"next"}
+                            breakLabel={"..."}
+                            breakClassName={"break-me"}
+                            pageCount={this.state.pageCount}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={3}
+                            onPageChange={this.handlePageClick}
+                            containerClassName={"pagination"}
+                            subContainerClassName={"pages pagination"}
+                            activeClassName={"active"} />
+                    </div> : null};
             </div >
         );
     }
