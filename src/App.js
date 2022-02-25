@@ -67,9 +67,8 @@ class App extends React.Component {
     }
 
     async getAppList() {
-        const res = await fetch(`http://localhost:10000/appList`);
+        const res = await fetch(`http://localhost:10000/appList-cached`);
         const data = await res.json();
-        const appIdString = `${this.state.appId}`
         this.setState({
             appList: data,
         });
@@ -90,10 +89,10 @@ class App extends React.Component {
                     if (this.state.appList[appName]) {
                         const app = this.state.appList[appName];
                         this.setState({
-                            appId: app.appId,
-                            appName: app.appName,
+                            appId: app.appid,
+                            appName: app.name,
                         })
-                        this.getAchievements(app.appId);
+                        this.getAchievements(app.appid);
                     }
                 }
                     , 500);
