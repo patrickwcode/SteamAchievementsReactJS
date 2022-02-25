@@ -77,24 +77,26 @@ class App extends React.Component {
 
     getIdByApp() {
         const input = document.getElementById("search-bar");
-        const appName = input.value;
+        const appName = input.value.toLowerCase();
 
         input.addEventListener('keyup', (e) => {
             clearTimeout(this.timeout);
+
+            // If user deletes search, content will not disappear and make another API call.
             if (input.value === "") {
                 return
             } else {
                 this.timeout = setTimeout(() => {
                     if (this.state.appList[appName]) {
-                        const appId = this.state.appList[appName];
+                        const app = this.state.appList[appName];
                         this.setState({
-                            appId: appId,
-                            appName: appName,
+                            appId: app.appId,
+                            appName: app.appName,
                         })
-                        this.getAchievements(appId);
+                        this.getAchievements(app.appId);
                     }
                 }
-                    , 800);
+                    , 500);
             }
         })
     }
