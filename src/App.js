@@ -83,7 +83,7 @@ class App extends React.Component {
             clearTimeout(this.timeout);
 
             // If user deletes search, content will not disappear and make another API call.
-            if (input.value === "") {
+            if (input.value === "" || input.value === this.state.appName.toLowerCase()) {
                 return
             } else {
                 this.timeout = setTimeout(() => {
