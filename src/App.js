@@ -77,21 +77,25 @@ class App extends React.Component {
 
     getIdByApp() {
         const input = document.getElementById("search-bar");
+        const appName = input.value;
 
         input.addEventListener('keyup', (e) => {
             clearTimeout(this.timeout);
-            this.timeout = setTimeout(() => {
-                const appName = input.value;
-                if (this.state.appList[appName]) {
-                    const appId = this.state.appList[appName];
-                    this.setState({
-                        appId: appId,
-                        appName: appName,
-                    })
-                    this.getAchievements(appId);
+            if (input.value === "") {
+                return
+            } else {
+                this.timeout = setTimeout(() => {
+                    if (this.state.appList[appName]) {
+                        const appId = this.state.appList[appName];
+                        this.setState({
+                            appId: appId,
+                            appName: appName,
+                        })
+                        this.getAchievements(appId);
+                    }
                 }
+                    , 800);
             }
-                , 800);
         })
     }
 
