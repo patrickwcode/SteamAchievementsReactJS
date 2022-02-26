@@ -14,7 +14,6 @@ class App extends React.Component {
             achievements: [],
             achievementBars: [],
             achievementTiles: [],
-            appList: [],
             appName: "Team Fortress 2",
             offset: 0,
             perPage: 30,
@@ -30,18 +29,17 @@ class App extends React.Component {
     async componentDidMount() {
         this.timeoutController = null;
         this.timeoutGetId = null;
-        this.getAchievements(this.state.appId);
-        this.getAppList();
+        await this.getAchievements(this.state.appId);
     }
 
     async getAchievements(appId) {
         // AbortController aborts the fetch after 5s.
         let data = null;
         const controller = new AbortController();
-        this.timeoutController = setTimeout(() => controller.abort(), 2500);
+        this.timeoutController = setTimeout(() => controller.abort(), 5000);
 
-        await fetch(`http://localhost:10000/achievements?id=${appId}`,
-            { signal: controller.signal })
+        await fetch(`http://localhost:10000/achievements?id=${appId}`
+            ,{ signal: controller.signal })
             .then(response => response.json())
             .then(json => data = json)
             .catch(err => console.log('Request Failed', err));
@@ -85,17 +83,10 @@ class App extends React.Component {
         })
     }
 
-    async getAppList() {
-        const res = await fetch(`http://localhost:10000/appList-cached`);
-        const data = await res.json();
-        this.setState({
-            appList: data,
-        });
-    }
-
-    getIdByApp() {
+    async getIdByApp() {
         const input = document.getElementById("search-bar");
         const appName = input.value.toLowerCase();
+        let app = {};
 
         input.addEventListener('keyup', (e) => {
             clearTimeout(this.timeoutGetId);
@@ -104,9 +95,12 @@ class App extends React.Component {
             if (input.value === "" || input.value === this.state.appName.toLowerCase()) {
                 return
             } else {
-                this.timeoutGetId = setTimeout(() => {
-                    if (this.state.appList[appName]) {
-                        const app = this.state.appList[appName];
+                this.timeoutGetId = setTimeout(async () => {
+                    await fetch(`http://localhost:10000/applist?name=${appName}`)
+                            .then(response => response.json())
+                            .then(json => app = json)
+                            .catch(err => console.log('Request Failed', err));
+                    if (app) {
                         this.setState({
                             appId: app.appid,
                             appName: app.name,
