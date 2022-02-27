@@ -121,6 +121,7 @@ class App extends React.Component {
               achievementTiles: [],
             });
             this.getAchievements(app.appid);
+            this.resetPages();
           }
         }, 500);
       }
@@ -234,6 +235,14 @@ class App extends React.Component {
         }
       }
     };
+
+    // Displays or hides Pagination so resetPages() won't crash app.
+    let stylesPaginate;
+    if (this.state.hasAchievements && !this.state.isLoading) {
+      stylesPaginate = { display: "block" };
+    } else {
+      stylesPaginate = { display: "none" };
+    }
     return (
       <div>
         <section>
@@ -279,23 +288,22 @@ class App extends React.Component {
         </div>
         {tileViewToggle()}
         {this.state.isLoading ? <div className="circle-loader" /> : null}
-        {this.state.hasAchievements && !this.state.isLoading ? (
-          <div>
-            <ReactPaginate
-              previousLabel={"prev"}
-              nextLabel={"next"}
-              breakLabel={"..."}
-              breakClassName={"break-me"}
-              pageCount={this.state.pageCount}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={3}
-              onPageChange={this.handlePageClick}
-              containerClassName={"pagination"}
-              subContainerClassName={"pages pagination"}
-              activeClassName={"active"}
-            />
-          </div>
-        ) : null}
+        <div style={stylesPaginate}>
+          <ReactPaginate
+            previousLabel={"prev"}
+            nextLabel={"next"}
+            breakLabel={"..."}
+            breakClassName={"break-me"}
+            pageCount={this.state.pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={3}
+            onPageChange={this.handlePageClick}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+          />
+        </div>
+        )}
       </div>
     );
   }
