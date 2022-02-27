@@ -126,6 +126,28 @@ textarea {
   border-radius: unset;
 }
 
+.circle-loader {
+  border: 14px solid #d4d4d4;
+  border-radius: 50%;
+  border-top: 14px solid #3292c9;
+  width: 100px;
+  height: 100px;
+  margin: 3em auto auto;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 1.5s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 @media screen and (max-width: 856px) {
   .achieveRow {
     width: 100%;

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../steam-achievements-node/.idea/steam-achievements-node.iml" filepath="$PROJECT_DIR$/../steam-achievements-node/.idea/steam-achievements-node.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/tf2-achievements.iml" filepath="$PROJECT_DIR$/.idea/tf2-achievements.iml" />
     </modules>
   </component>
