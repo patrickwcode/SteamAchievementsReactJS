@@ -225,11 +225,13 @@ class App extends React.Component {
           );
         }
       } else {
-        return (
-          <div className="fade-in" style={{ marginTop: "3em" }}>
-            <h1>No Achievements Found</h1>
-          </div>
-        );
+        if (!this.state.isLoading) {
+          return (
+            <div className="fade-in" style={{ marginTop: "3em" }}>
+              <h1>No Achievements Found</h1>
+            </div>
+          );
+        }
       }
     };
     return (
