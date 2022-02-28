@@ -59,6 +59,11 @@ class App extends React.Component {
         isLoading: false,
       });
     }
+    this.displayAchievementsOnPage();
+    this.resetPages();
+  }
+
+  displayAchievementsOnPage() {
     const dataSorted = this.sortAchievements(this.state.achievements);
     const dataSlice = dataSorted.slice(
       this.state.offset,
@@ -121,9 +126,8 @@ class App extends React.Component {
               achievementTiles: [],
             });
             this.getAchievements(app.appid);
-            this.resetPages();
           }
-        }, 500);
+        }, 800);
       }
     });
   }
@@ -142,7 +146,7 @@ class App extends React.Component {
         offset: offset,
       },
       () => {
-        this.getAchievements(this.state.appId);
+        this.displayAchievementsOnPage();
       }
     );
   };
@@ -161,7 +165,7 @@ class App extends React.Component {
         selected: 0,
       },
       () => {
-        this.getAchievements(this.state.appId);
+        this.displayAchievementsOnPage();
       }
     );
   };
@@ -303,7 +307,6 @@ class App extends React.Component {
             activeClassName={"active"}
           />
         </div>
-        )}
       </div>
     );
   }
