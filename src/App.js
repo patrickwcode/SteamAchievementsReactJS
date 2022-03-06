@@ -19,6 +19,7 @@ class App extends React.Component {
       perPage: 30,
       currentPage: 0,
       pageRangeDisplayed: 8,
+      gamesFoundArr: [],
       tileView: false,
       hasAchievements: true,
       isLoading: true,
@@ -44,23 +45,24 @@ class App extends React.Component {
     })
       .then((response) => response.json())
       .then((json) => (data = json))
-      .catch((err) => console.log("Request Failed", err));
+      .catch((err) =>
+        console.error("Request Failed. No achievements were found.", err)
+      );
 
-    if (data === null) {
-      this.setState({
-        hasAchievements: false,
-        pageRangeDisplayed: 0,
-        isLoading: false,
-      });
-    } else {
+    if (data) {
       this.setState({
         achievements: data,
         hasAchievements: true,
         isLoading: false,
       });
+      this.displayAchievementsOnPage();
+      this.resetPages();
+    } else {
+      this.setState({
+        hasAchievements: false,
+        isLoading: false,
+      });
     }
-    this.displayAchievementsOnPage();
-    this.resetPages();
   }
 
   displayAchievementsOnPage() {
@@ -100,7 +102,7 @@ class App extends React.Component {
   async getIdByApp() {
     const input = document.getElementById("search-bar");
     const appName = input.value.toLowerCase();
-    let app = {};
+    let app = null;
 
     input.addEventListener("keyup", (e) => {
       clearTimeout(this.timeoutGetId);
@@ -110,14 +112,17 @@ class App extends React.Component {
         input.value === "" ||
         input.value === this.state.appName.toLowerCase()
       ) {
-        // return;
+        return;
       } else {
         this.timeoutGetId = setTimeout(async () => {
           await fetch(`http://localhost:10000/applist?name=${appName}`)
             .then((response) => response.json())
             .then((json) => (app = json))
-            .catch((err) => console.log("Request Failed", err));
+            .catch((err) =>
+              console.error("Request Failed. No Achievements were found.", err)
+            );
           if (app) {
+            console.log("app = " + app);
             this.setState({
               appId: app.appid,
               appName: app.name,
@@ -125,11 +130,45 @@ class App extends React.Component {
               achievementBars: [],
               achievementTiles: [],
             });
-            this.getAchievements(app.appid);
+            await this.getAchievements(app.appid);
+          } else {
+            await this.searchForApps(appName);
           }
         }, 800);
       }
     });
+  }
+
+  async searchForApps(appName) {
+    let apps = {};
+    let gamesFoundArr = [];
+    this.setState({ gamesFoundArr: [] });
+
+    await fetch(`http://localhost:10000/applist-filter?name=${appName}`)
+      .then((response) => response.json())
+      .then((json) => (apps = json))
+      .catch((err) =>
+        console.error("Request Failed. No games were found.", err)
+      );
+
+    // Creates an array for all apps that match appName from search.
+    Object.keys(apps).map((key, value) => {
+      const appElem = (
+        <div
+          className="game-image-container"
+          onClick={() => {
+            this.getAchievements(apps[key].appid);
+          }}
+        >
+          <img
+            src={`https://steamcdn-a.akamaihd.net/steam/apps/${apps[key].appid}/capsule_184x69.jpg`}
+            alt={key}
+          />
+        </div>
+      );
+      return gamesFoundArr.push(appElem);
+    });
+    this.setState({ gamesFoundArr: gamesFoundArr });
   }
 
   handlePageChange(pageNumber) {
@@ -272,6 +311,7 @@ class App extends React.Component {
                   alt={this.state.appName}
                 />
               </div>
+              <div>{this.state.gamesFoundArr}</div>
             </div>
           </article>
         </section>
