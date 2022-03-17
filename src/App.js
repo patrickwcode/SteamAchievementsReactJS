@@ -35,14 +35,9 @@ class App extends React.Component {
   }
 
   async getAchievements(appId) {
-    // AbortController aborts the fetch after 5s.
     let data = null;
-    const controller = new AbortController();
-    this.timeoutController = setTimeout(() => controller.abort(), 5000);
 
-    await fetch(`http://localhost:10000/achievements?id=${appId}`, {
-      signal: controller.signal,
-    })
+    await fetch(`http://localhost:10000/achievements?id=${appId}`)
       .then((response) => response.json())
       .then((json) => (data = json))
       .catch((err) =>
@@ -104,7 +99,7 @@ class App extends React.Component {
     const appName = input.value.toLowerCase();
     let app = null;
 
-    input.addEventListener("keyup", (e) => {
+    input.addEventListener("keyup", () => {
       clearTimeout(this.timeoutGetId);
 
       // If user deletes search, content will not disappear and make another API call.
@@ -121,19 +116,18 @@ class App extends React.Component {
             .catch((err) =>
               console.error("Request Failed. No Achievements were found.", err)
             );
-          if (app) {
-            console.log("app = " + app);
-            this.setState({
-              appId: app.appid,
-              appName: app.name,
-              isLoading: true,
-              achievementBars: [],
-              achievementTiles: [],
-            });
-            await this.getAchievements(app.appid);
-          } else {
-            await this.searchForApps(appName);
-          }
+          // if (app) {
+          //   this.setState({
+          //     appId: app.appid,
+          //     appName: app.name,
+          //     isLoading: true,
+          //     achievementBars: [],
+          //     achievementTiles: [],
+          //   });
+          //   await this.getAchievements(app.appid);
+          // } else {
+          await this.searchForApps(appName);
+          // }
         }, 800);
       }
     });
@@ -152,12 +146,21 @@ class App extends React.Component {
       );
 
     // Creates an array for all apps that match appName from search.
-    Object.keys(apps).map((key, value) => {
+    Object.keys(apps).map((key) => {
       const appElem = (
         <div
           className="game-image-container"
-          onClick={() => {
-            this.getAchievements(apps[key].appid);
+          onClick={async () => {
+            this.setState(
+              {
+                appId: apps[key].appid,
+                appName: apps[key].name,
+                isLoading: true,
+              },
+              async () => {
+                await this.getAchievements(apps[key].appid);
+              }
+            );
           }}
         >
           <img
@@ -166,7 +169,14 @@ class App extends React.Component {
           />
         </div>
       );
-      return gamesFoundArr.push(appElem);
+
+      // If game is an exact match, then it is pushed to front of array.
+      if (appName === key) {
+        gamesFoundArr = [appElem, ...gamesFoundArr];
+      } else {
+        gamesFoundArr.push(appElem);
+      }
+      return gamesFoundArr;
     });
     this.setState({ gamesFoundArr: gamesFoundArr });
   }
@@ -288,6 +298,10 @@ class App extends React.Component {
     }
     return (
       <div>
+        <title>Steam Achievements Search</title>
+        <header>
+          <h1>Steam Achievements Search</h1>
+        </header>
         <section>
           <article>
             <div className="search-container">
@@ -299,6 +313,7 @@ class App extends React.Component {
                   this.getIdByApp();
                 }}
               />
+              <div id="search-results">{this.state.gamesFoundArr}</div>
             </div>
             <div className="game-info">
               <div className="subtitle">
@@ -311,7 +326,6 @@ class App extends React.Component {
                   alt={this.state.appName}
                 />
               </div>
-              <div>{this.state.gamesFoundArr}</div>
             </div>
           </article>
         </section>

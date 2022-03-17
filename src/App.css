@@ -1,177 +1,190 @@
 body,
 textarea {
-  font-family: Arial, Helvetica, Verdana, sans-serif;
-  background-color: #1b2838;
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+    background-color: #1b2838;
 }
 
 .achieveImgHolder {
-  float: left;
-  width: 64px;
-  height: 64px;
-  padding: 1px 10px 1px 0px;
+    float: left;
+    width: 64px;
+    height: 64px;
+    padding: 1px 10px 1px 0px;
 }
 
 .achieveRow {
-  width: 55%;
-  margin: auto;
-  padding: 0.5em 1em 0.5em 1em;
-  background-color: #111923;
+    width: 55%;
+    margin: auto;
+    padding: 0.5em 1em 0.5em 1em;
+    background-color: #111923;
 }
 
 .achieveTileContainer {
-  width: 60%;
-  display: flex;
-  margin: auto;
-  justify-content: center;
-  flex-wrap: wrap;
+    width: 60%;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .achieveRowTile {
-  background-color: #111923;
+    background-color: #111923;
 }
 
 .achieveImgHolderTile {
-	/* float: left; */
-	width: 80px;
-	height: 80px;
-	/* margin: auto; */
-	padding: 0.8em;
-	margin-bottom: 5em;
-	text-align: center;
-  }
+    /* float: left; */
+    width: 80px;
+    height: 80px;
+    /* margin: auto; */
+    padding: 0.8em;
+    margin-bottom: 5em;
+    text-align: center;
+}
 
 .achieveTxtHolder {
-  position: relative;
-  border: 1px solid #17435c;
-  padding: 1px;
-  overflow: hidden;
+    position: relative;
+    border: 1px solid #17435c;
+    padding: 1px;
+    overflow: hidden;
 }
 
 .achieveFill {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  bottom: 2px;
-  z-index: 10;
-  background: #17435c;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    z-index: 10;
+    background: #17435c;
 }
 
 .achieveTxt {
-  position: relative;
-  padding: 6px 6px 0px 6px;
-  z-index: 40;
+    position: relative;
+    padding: 6px 6px 0px 6px;
+    z-index: 40;
 }
 
 .achievePercent {
-  float: right;
-  position: relative;
-  margin-top: 27px;
-  margin-right: 20px;
-  color: #66c0f4;
-  font-size: 13px;
-  z-index: 40;
+    float: right;
+    position: relative;
+    margin-top: 27px;
+    margin-right: 20px;
+    color: #66c0f4;
+    font-size: 13px;
+    z-index: 40;
 }
 
 .achieveTxt h3 {
-  margin: 5px 5px 0px 5px;
-  font-weight: normal;
-  font-size: 18px;
-  color: #c6d4df;
+    margin: 5px 5px 0px 5px;
+    font-weight: normal;
+    font-size: 18px;
+    color: #c6d4df;
 }
 
 .achieveTxt h5 {
-  margin: 0px 5px 5px 5px;
-  font-weight: normal;
-  font-size: 14px;
-  color: #8f98a0;
+    margin: 0px 5px 5px 5px;
+    font-weight: normal;
+    font-size: 14px;
+    color: #8f98a0;
 }
 
 .pagination {
-  display: flex;
-  justify-content: center;
-  margin: 15px auto;
-  padding: 0;
-  list-style: none;
-  outline: none;
+    display: flex;
+    justify-content: center;
+    margin: 15px auto;
+    padding: 0;
+    list-style: none;
+    outline: none;
 }
+
 .pagination > .active > a {
-  background-color: #47ccde;
-  border-color: #47ccde;
-  color: #fff;
+    background-color: #47ccde;
+    border-color: #47ccde;
+    color: #fff;
 }
+
 .pagination > li > a {
-  border: 1px solid #47ccde;
-  padding: 5px 10px;
-  outline: none;
-  cursor: pointer;
+    border: 1px solid #47ccde;
+    padding: 5px 10px;
+    outline: none;
+    cursor: pointer;
 }
+
 .pagination > .active > a,
 .pagination > .active > span,
 .pagination > .active > a:hover,
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-  background-color: #47ccde;
-  border-color: #47ccde;
-  outline: none;
+    background-color: #47ccde;
+    border-color: #47ccde;
+    outline: none;
 }
+
 .pagination > li > a,
 .pagination > li > span {
-  color: #47ccde;
+    color: #47ccde;
 }
+
 .pagination > li:first-child > a,
 .pagination > li:first-child > span,
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
-  border-radius: unset;
+    border-radius: unset;
 }
 
 .circle-loader {
-  border: 14px solid #d4d4d4;
-  border-radius: 50%;
-  border-top: 14px solid #3292c9;
-  width: 100px;
-  height: 100px;
-  margin: 3em auto auto;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 1.5s linear infinite;
+    border: 14px solid #d4d4d4;
+    border-radius: 50%;
+    border-top: 14px solid #3292c9;
+    width: 100px;
+    height: 100px;
+    margin: 3em auto auto;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 1.5s linear infinite;
 }
 
 /* Safari */
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @media screen and (max-width: 856px) {
-  .achieveRow {
-    width: 100%;
-  }
+    .achieveRow {
+        width: 100%;
+    }
 
-  .achievePercent {
-    padding-left: 1em;
-  }
+    .achievePercent {
+        padding-left: 1em;
+    }
 
-  .achieveTileContainer {
-    width: 100%;
-  }
+    .achieveTileContainer {
+        width: 100%;
+    }
 }
 
 .fade-in {
-  opacity: 1;
-  animation: fadeIn 0.5s linear;
+    opacity: 1;
+    animation: fadeIn 0.5s linear;
 }
 
 @keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
