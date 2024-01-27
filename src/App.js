@@ -116,6 +116,10 @@ class App extends React.Component {
             .catch((err) =>
               console.error("Request Failed. No Achievements were found.", err)
             );
+
+          // FIX HOW APPS DISPLAY
+          // USE applist-filter instead?
+
           // if (app) {
           //   this.setState({
           //     appId: app.appid,
