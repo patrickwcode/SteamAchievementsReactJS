@@ -182,19 +182,17 @@ class App extends React.Component {
       }
       return gamesFoundArr;
     });
-    this.hideSearchResults();
+    window.addEventListener("click", this.toggleSearchResults);
     this.setState({ gamesFoundArr: gamesFoundArr });
   }
 
-  hideSearchResults = () => {
-    let searchResults = document.getElementsByClassName("search-result");
-    window.addEventListener("click", (e) => {
-      if (e.target.className !== "search-result") {
-        for (const result of searchResults) {
-          result.style.display = "none";
-        }
-      }
-    });
+  toggleSearchResults = (e) => {
+    const searchResults = document.getElementById("search-results");
+    if (e.target.id === "search-bar") {
+      searchResults.style.display = "block";
+    } else {
+      searchResults.style.display = "none";
+    }
   };
 
   handlePageChange(pageNumber) {
@@ -325,6 +323,7 @@ class App extends React.Component {
                 id="search-bar"
                 type="text"
                 placeholder="Search Games..."
+                onClick={this.toggleSearchResults}
                 onChange={() => {
                   this.getIdByApp();
                 }}
