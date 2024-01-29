@@ -84,7 +84,7 @@ class App extends React.Component {
         description={achievement.description}
         percent={achievement.percent}
         iconUrl={achievement.iconUrl}
-        showModal={this.openModal}
+        showModal={this.showModal}
       />
     ));
     this.setState({
@@ -128,7 +128,7 @@ class App extends React.Component {
           //     achievementBars: [],
           //     achievementTiles: [],
           //   });
-          //   await this.getAchievements(app.appid);
+          // await this.getAchievements(app.appid);
           // } else {
           await this.searchForApps(appName);
           // }
@@ -153,7 +153,7 @@ class App extends React.Component {
     Object.keys(apps).map((key) => {
       const appElem = (
         <div
-          className="game-image-container"
+          className="search-result"
           onClick={async () => {
             this.setState(
               {
@@ -182,8 +182,20 @@ class App extends React.Component {
       }
       return gamesFoundArr;
     });
+    this.hideSearchResults();
     this.setState({ gamesFoundArr: gamesFoundArr });
   }
+
+  hideSearchResults = () => {
+    let searchResults = document.getElementsByClassName("search-result");
+    window.addEventListener("click", (e) => {
+      if (e.target.className !== "search-result") {
+        for (const result of searchResults) {
+          result.style.display = "none";
+        }
+      }
+    });
+  };
 
   handlePageChange(pageNumber) {
     this.setState({ activePage: pageNumber });
@@ -260,7 +272,7 @@ class App extends React.Component {
     this.setState({ tileView: checkbox });
   };
 
-  openModal = () => {
+  showModal = () => {
     this.setState({ showModal: !this.state.showModal });
   };
 

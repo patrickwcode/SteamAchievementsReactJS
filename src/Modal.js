@@ -4,8 +4,8 @@ import './Modal.css';
 
 const Modal = ({ name, description, percent, iconUrl, isVisible, hideModal }) => {
 
-  function clickOffModal() {
-    var modal = document.getElementById("modal");
+  function handleModal() {
+    let modal = document.getElementById("modal");
     window.onclick = (event) => {
       if (event.target === modal) {
         hideModal();
@@ -15,7 +15,7 @@ const Modal = ({ name, description, percent, iconUrl, isVisible, hideModal }) =>
 
   return isVisible
     ? createPortal(
-      <div className="modal" id="modal" onClick={clickOffModal}>
+      <div className="modal" id="modal" onClick={handleModal}>
         <div className="modal-content">
           <button className="close" onClick={hideModal}>
             X
