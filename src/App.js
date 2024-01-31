@@ -37,7 +37,7 @@ class App extends React.Component {
   async getAchievements(appId) {
     let data = null;
 
-    await fetch(`http://localhost:10000/achievements?id=${appId}`)
+    await fetch(`https://achievements.patrickwcode.com/api/achievements?id=${appId}`)
       .then((response) => response.json())
       .then((json) => (data = json))
       .catch((err) =>
@@ -110,7 +110,7 @@ class App extends React.Component {
         return;
       } else {
         this.timeoutGetId = setTimeout(async () => {
-          await fetch(`http://localhost:10000/applist?name=${appName}`)
+          await fetch(`https://achievements.patrickwcode.com/api/applist?name=${appName}`)
             .then((response) => response.json())
             .then((json) => (app = json))
             .catch((err) =>
@@ -142,7 +142,7 @@ class App extends React.Component {
     let gamesFoundArr = [];
     this.setState({ gamesFoundArr: [] });
 
-    await fetch(`http://localhost:10000/applist-filter?name=${appName}`)
+    await fetch(`https://achievements.patrickwcode.com/api/applist-filter?name=${appName}`)
       .then((response) => response.json())
       .then((json) => (apps = json))
       .catch((err) =>
