@@ -15,6 +15,7 @@ class App extends React.Component {
       achievementBars: [],
       achievementTiles: [],
       appName: "Team Fortress 2",
+      prevSearch: "Team Fortress 2",
       offset: 0,
       perPage: 30,
       currentPage: 0,
@@ -22,7 +23,8 @@ class App extends React.Component {
       gamesFoundArr: [],
       tileView: false,
       hasAchievements: true,
-      isLoading: true,
+      hasSearched: false,
+      areAchievementsLoading: true,
     };
 
     this.getAchievements = this.getAchievements.bind(this);
@@ -37,7 +39,9 @@ class App extends React.Component {
   async getAchievements(appId) {
     let data = null;
 
-    await fetch(`https://achievements.patrickwcode.com/api/achievements?id=${appId}`)
+    await fetch(
+      `https://achievements.patrickwcode.com/api/achievements?id=${appId}`
+    )
       .then((response) => response.json())
       .then((json) => (data = json))
       .catch((err) =>
@@ -48,14 +52,14 @@ class App extends React.Component {
       this.setState({
         achievements: data,
         hasAchievements: true,
-        isLoading: false,
+        areAchievementsLoading: false,
       });
       this.displayAchievementsOnPage();
       this.resetPages();
     } else {
       this.setState({
         hasAchievements: false,
-        isLoading: false,
+        areAchievementsLoading: false,
       });
     }
   }
@@ -84,7 +88,7 @@ class App extends React.Component {
         description={achievement.description}
         percent={achievement.percent}
         iconUrl={achievement.iconUrl}
-        showModal={this.showModal}
+        showModal={this.toggleModal}
       />
     ));
     this.setState({
@@ -94,62 +98,40 @@ class App extends React.Component {
     });
   }
 
-  async getIdByApp() {
+  async searchForApp() {
     const input = document.getElementById("search-bar");
     const appName = input.value.toLowerCase();
-    let app = null;
+    let apps = {};
 
     input.addEventListener("keyup", () => {
       clearTimeout(this.timeoutGetId);
 
-      // If user deletes search, content will not disappear and make another API call.
+      // If user deletes search or presses a non-character key, this will not make another API call.
       if (
         input.value === "" ||
-        input.value === this.state.appName.toLowerCase()
+        input.value === this.state.appName ||
+        input.value === this.state.prevSearch
       ) {
         return;
       } else {
         this.timeoutGetId = setTimeout(async () => {
-          await fetch(`https://achievements.patrickwcode.com/api/applist?name=${appName}`)
+          await fetch(
+            `https://achievements.patrickwcode.com/api/applist-filter?name=${appName}`
+          )
             .then((response) => response.json())
-            .then((json) => (app = json))
+            .then((json) => (apps = json))
             .catch((err) =>
               console.error("Request Failed. No Achievements were found.", err)
             );
-
-          // FIX HOW APPS DISPLAY
-          // USE applist-filter instead?
-
-          // if (app) {
-          //   this.setState({
-          //     appId: app.appid,
-          //     appName: app.name,
-          //     isLoading: true,
-          //     achievementBars: [],
-          //     achievementTiles: [],
-          //   });
-          // await this.getAchievements(app.appid);
-          // } else {
-          await this.searchForApps(appName);
-          // }
-        }, 800);
+          this.createGamesFoundArray(apps, appName);
+        }, 700);
       }
     });
   }
 
-  async searchForApps(appName) {
-    let apps = {};
+  createGamesFoundArray = (apps, appName) => {
     let gamesFoundArr = [];
     this.setState({ gamesFoundArr: [] });
-
-    await fetch(`https://achievements.patrickwcode.com/api/applist-filter?name=${appName}`)
-      .then((response) => response.json())
-      .then((json) => (apps = json))
-      .catch((err) =>
-        console.error("Request Failed. No games were found.", err)
-      );
-
-    // Creates an array for all apps that match appName from search.
     Object.keys(apps).map((key) => {
       const appElem = (
         <div
@@ -159,7 +141,7 @@ class App extends React.Component {
               {
                 appId: apps[key].appid,
                 appName: apps[key].name,
-                isLoading: true,
+                areAchievementsLoading: true,
               },
               async () => {
                 await this.getAchievements(apps[key].appid);
@@ -182,13 +164,23 @@ class App extends React.Component {
       }
       return gamesFoundArr;
     });
-    window.addEventListener("click", this.toggleSearchResults);
-    this.setState({ gamesFoundArr: gamesFoundArr });
+
+    this.setState(
+      {
+        gamesFoundArr: gamesFoundArr,
+        prevSearch: appName,
+        hasSearched: true,
+      },
+      () => {
+        window.addEventListener("click", this.toggleSearchResults);
+        document.getElementById("search-bar").click();
+      }
+    );
   }
 
   toggleSearchResults = (e) => {
     const searchResults = document.getElementById("search-results");
-    if (e.target.id === "search-bar") {
+    if (e.target.id === "search-bar" && this.state.hasSearched) {
       searchResults.style.display = "block";
     } else {
       searchResults.style.display = "none";
@@ -265,17 +257,17 @@ class App extends React.Component {
     return achievementsSorted;
   };
 
-  tileCheckboxToggle = () => {
+  toggleTileCheckbox = () => {
     const checkbox = document.getElementById("tile-view-checkbox").checked;
     this.setState({ tileView: checkbox });
   };
 
-  showModal = () => {
+  toggleModal = () => {
     this.setState({ showModal: !this.state.showModal });
   };
 
   render() {
-    const tileViewToggle = () => {
+    const toggleTileView = () => {
       if (this.state.hasAchievements) {
         if (this.state.tileView) {
           return (
@@ -293,7 +285,7 @@ class App extends React.Component {
           );
         }
       } else {
-        if (!this.state.isLoading) {
+        if (!this.state.areAchievementsLoading) {
           return (
             <div className="fade-in" style={{ marginTop: "3em" }}>
               <h1>No Achievements Found</h1>
@@ -305,7 +297,7 @@ class App extends React.Component {
 
     // Displays or hides Pagination so resetPages() won't crash app.
     let stylesPaginate;
-    if (this.state.hasAchievements && !this.state.isLoading) {
+    if (this.state.hasAchievements && !this.state.areAchievementsLoading) {
       stylesPaginate = { display: "block" };
     } else {
       stylesPaginate = { display: "none" };
@@ -325,10 +317,16 @@ class App extends React.Component {
                 placeholder="Search Games..."
                 onClick={this.toggleSearchResults}
                 onChange={() => {
-                  this.getIdByApp();
+                  this.searchForApp();
                 }}
               />
-              <div id="search-results">{this.state.gamesFoundArr}</div>
+              <div id="search-results" style={{ display: "none" }}>
+                {this.state.gamesFoundArr.length > 0 ? (
+                  this.state.gamesFoundArr
+                ) : (
+                  <h1>No Games Found.</h1>
+                )}
+              </div>
             </div>
             <div className="game-info">
               <div className="subtitle">
@@ -356,11 +354,13 @@ class App extends React.Component {
           <input
             type="checkbox"
             id="tile-view-checkbox"
-            onChange={this.tileCheckboxToggle}
+            onChange={this.toggleTileCheckbox}
           />
         </div>
-        {tileViewToggle()}
-        {this.state.isLoading ? <div className="circle-loader" /> : null}
+        {toggleTileView()}
+        {this.state.areAchievementsLoading ? (
+          <div className="circle-loader" />
+        ) : null}
         <div style={stylesPaginate}>
           <ReactPaginate
             previousLabel={"prev"}
