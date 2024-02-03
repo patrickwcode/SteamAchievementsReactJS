@@ -103,35 +103,41 @@ class App extends React.Component {
     const appName = input.value.toLowerCase();
     let apps = {};
 
-    input.addEventListener("keyup", () => {
-      clearTimeout(this.timeoutGetId);
+    ["keyup", "keydown"].forEach((event) => {
+      input.addEventListener(event, () => {
+        clearTimeout(this.timeoutGetId);
 
-      // If user deletes search or presses a non-character key, this will not make another API call.
-      if (
-        input.value === "" ||
-        input.value === this.state.appName ||
-        input.value === this.state.prevSearch
-      ) {
-        return;
-      } else {
-        this.timeoutGetId = setTimeout(async () => {
-          await fetch(
-            `https://achievements.patrickwcode.com/api/applist-filter?name=${appName}`
-          )
-            .then((response) => response.json())
-            .then((json) => (apps = json))
-            .catch((err) =>
-              console.error("Request Failed. No Achievements were found.", err)
-            );
-          this.createGamesFoundArray(apps, appName);
-        }, 700);
-      }
+        // If user deletes search or presses a non-character key, this will not make another API call.
+        if (
+          input.value === "" ||
+          input.value === this.state.appName ||
+          input.value === this.state.prevSearch
+        ) {
+          return;
+        } else {
+          this.timeoutGetId = setTimeout(async () => {
+            await fetch(
+              `https://achievements.patrickwcode.com/api/applist-filter?name=${appName}`
+            )
+              .then((response) => response.json())
+              .then((json) => (apps = json))
+              .catch((err) =>
+                console.error(
+                  "Request Failed. No Achievements were found.",
+                  err
+                )
+              );
+            this.createGamesFoundArray(apps, appName);
+          }, 700);
+        }
+      });
     });
   }
 
   createGamesFoundArray = (apps, appName) => {
     let gamesFoundArr = [];
     this.setState({ gamesFoundArr: [] });
+
     Object.keys(apps).map((key) => {
       const appElem = (
         <div
@@ -176,7 +182,7 @@ class App extends React.Component {
         document.getElementById("search-bar").click();
       }
     );
-  }
+  };
 
   toggleSearchResults = (e) => {
     const searchResults = document.getElementById("search-results");
