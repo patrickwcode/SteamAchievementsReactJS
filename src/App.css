@@ -4,14 +4,9 @@ textarea {
   background-color: #1b2838;
 }
 
-.achieveImgHolder {
-  float: left;
-  width: 64px;
-  height: 64px;
-  padding: 1px 20px 1px 0px;
-}
-
 .achieveRow {
+  display: flex;
+  flex-direction: row;
   width: 55%;
   margin: auto;
   padding: 0.5em 1em 0.5em 1em;
@@ -30,11 +25,13 @@ textarea {
   background-color: #111923;
 }
 
+.achieveImgHolder {
+  padding-right: 0.2em;
+}
+
 .achieveImgHolderTile {
-  /* float: left; */
   width: 80px;
   height: 80px;
-  /* margin: auto; */
   padding: 0.8em;
   margin-bottom: 5em;
   text-align: center;
@@ -58,6 +55,7 @@ textarea {
 
 .achieveTxt {
   position: relative;
+  width: 100vw;
   padding: 6px 6px 0px 6px;
   z-index: 40;
 }
@@ -88,26 +86,31 @@ textarea {
 
 @media screen and (max-width: 1000px) {
   article {
-    width: 100%;
+    width: 100vw;
     font-size: 2em;
+  }
+
+  .game-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .subtitle {
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
 
   .game-image-container {
-    display: flex;
-    justify-content: center;
   }
 
   .achieveRow {
-    width: 100%;
+    width: 100vw;
     padding: 1em 0 0 0;
   }
 
-  .achieveImgHolder > img {
+  .achieveImgHolder img {
     width: 15vw;
     height: 15vw;
   }
@@ -116,11 +119,11 @@ textarea {
     height: 7vh;
   }
 
-  .achieveTxt > h3 {
+  .achieveTxt h3 {
     font-size: 2.5em;
   }
 
-  .achieveTxt > h5 {
+  .achieveTxt h5 {
     font-size: 1.8em;
   }
 

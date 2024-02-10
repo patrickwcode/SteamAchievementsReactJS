@@ -7,7 +7,7 @@ export default function GameAchievementBar(props) {
       <div className="achieveRow fade-in">
         <div className="achieveImgHolder">
           <img src={iconUrl}
-            alt={name} width="64px" height="64px" border="0" />
+            alt={name}/>
         </div>
         <div className="achieveTxtHolder">
           <div className="achieveFill" style={{ width: `${percent}%` }}>

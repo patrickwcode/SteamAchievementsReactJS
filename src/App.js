@@ -363,7 +363,7 @@ class App extends React.Component {
             onChange={this.toggleTileCheckbox}
           />
         </div>
-        {this.toggleTileView()}
+        {toggleTileView()}
         {this.state.areAchievementsLoading ? (
           <div className="circle-loader" />
         ) : null}
