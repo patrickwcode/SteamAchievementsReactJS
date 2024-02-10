@@ -330,7 +330,7 @@ class App extends React.Component {
                 {this.state.gamesFoundArr.length > 0 ? (
                   this.state.gamesFoundArr
                 ) : (
-                  <h1>No Games Found.</h1>
+                  <h4 style={{fontSize: "2em"}}>No Games Found.</h4>
                 )}
               </div>
             </div>
@@ -363,7 +363,7 @@ class App extends React.Component {
             onChange={this.toggleTileCheckbox}
           />
         </div>
-        {toggleTileView()}
+        {this.toggleTileView()}
         {this.state.areAchievementsLoading ? (
           <div className="circle-loader" />
         ) : null}
