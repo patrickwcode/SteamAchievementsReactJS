@@ -110,19 +110,29 @@ textarea {
     width: 50vw;
   }
 
-  .search-filters {
-    width: 100vw;
-    font-size: 2.5em;
-  }
-
   #search-bar {
     height: 1.5em;
     width: 80vw;
     font-size: 1em;
   }
 
+  .search-filters {
+    width: 100vw;
+    /* font-size: 3em; */
+  }
+
+  .search-filters label {
+    font-size: 2.5em;
+  }
+
   #filter-select {
-    font-size: 1em;
+    font-size: 2em;
+    text-align: center;
+    margin-right: 1em;
+  }
+
+  #filter-select option {
+    font-size: 0.6em;
   }
 
   #tile-view-checkbox {
