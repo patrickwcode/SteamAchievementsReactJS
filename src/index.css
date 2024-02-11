@@ -50,15 +50,13 @@ article {
     background-color: #c6c4c2;
 }
 
-#search-results {
+/* #search-results {
     display: flex;
     flex-direction: column;
     position: absolute;
-    left: 35%;
-    width: 30%;
     z-index: 100;
     background-color: rgba(0, 0, 0, 0.95);
-}
+} */
 
 #search-icon {
     width: 2%;

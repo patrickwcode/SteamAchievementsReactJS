@@ -118,7 +118,6 @@ textarea {
 
   .search-filters {
     width: 100vw;
-    /* font-size: 3em; */
   }
 
   .search-filters label {
@@ -138,6 +137,24 @@ textarea {
   #tile-view-checkbox {
     transform: scale(3);
     margin-left: 1.5em;
+  }
+
+  #search-results {
+    position: absolute;
+    left: 15vw;
+    width: 70vw;
+    margin-top: 0.1em;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+  }
+
+  .search-result {
+    width: 100%;
+    margin-bottom: 1em;
+  }
+
+  .search-result img {
+    width: 85%;
   }
 
   .achieveRow {
