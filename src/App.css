@@ -85,9 +85,13 @@ textarea {
 }
 
 @media screen and (max-width: 1000px) {
+  header {
+    font-size: 2em;
+  }
+
   article {
     width: 100vw;
-    font-size: 2em;
+    font-size: 2.5em;
   }
 
   .game-info {
@@ -102,7 +106,28 @@ textarea {
     align-items: center;
   }
 
-  .game-image-container {
+  .game-image-container img {
+    width: 50vw;
+  }
+
+  .search-filters {
+    width: 100vw;
+    font-size: 2.5em;
+  }
+
+  #search-bar {
+    height: 1.5em;
+    width: 80vw;
+    font-size: 1em;
+  }
+
+  #filter-select {
+    font-size: 1em;
+  }
+
+  #tile-view-checkbox {
+    transform: scale(3);
+    margin-left: 1.5em;
   }
 
   .achieveRow {
