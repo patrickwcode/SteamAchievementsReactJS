@@ -187,6 +187,10 @@ textarea {
   .achieveTileContainer {
     width: 100%;
   }
+
+  .pagination {
+    font-size: 3.5em;
+  }
 }
 
 /* Safari */
