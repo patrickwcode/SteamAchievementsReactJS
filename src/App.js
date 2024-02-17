@@ -273,7 +273,7 @@ class App extends React.Component {
   };
 
   render() {
-    const toggleTileView = () => {
+    const displayAchievements = () => {
       if (this.state.hasAchievements) {
         if (this.state.tileView) {
           return (
@@ -363,7 +363,7 @@ class App extends React.Component {
             onChange={this.toggleTileCheckbox}
           />
         </div>
-        {toggleTileView()}
+        {displayAchievements()}
         {this.state.areAchievementsLoading ? (
           <div className="circle-loader" />
         ) : null}

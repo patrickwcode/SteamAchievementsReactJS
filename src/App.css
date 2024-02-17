@@ -185,7 +185,24 @@ textarea {
   }
 
   .achieveTileContainer {
-    width: 100%;
+    width: 100vw;
+    background-color: #111923;
+  }
+
+  .achieveImgHolderTile {
+    width: 20vw;
+    height: 28vw;
+    margin-bottom: 2em;
+    overflow: hidden;
+  }
+
+  .achieveImgHolderTile img {
+    width: 20vw;
+    height: 20vw;
+  }
+
+  .achieveTileName {
+    font-size: 2em;
   }
 
   .pagination {
