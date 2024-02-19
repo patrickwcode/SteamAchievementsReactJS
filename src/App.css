@@ -4,6 +4,20 @@ textarea {
   background-color: #1b2838;
 }
 
+#search-results {
+  position: absolute;
+  left: 20vw;
+  width: 60vw;
+  margin-top: 0.1em;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+}
+
+.search-result > img {
+  width: 45%;
+  margin-top: 1em;
+}
+
 .achieveRow {
   display: flex;
   flex-direction: row;
@@ -35,6 +49,11 @@ textarea {
   padding: 0.8em;
   margin-bottom: 5em;
   text-align: center;
+}
+
+.achieveImgHolderTile > img {
+  width: 5vw;
+  height: 5vw;
 }
 
 .achieveTxtHolder {
@@ -70,14 +89,14 @@ textarea {
   z-index: 40;
 }
 
-.achieveTxt h3 {
+.achieveTxt > h3 {
   margin: 5px 5px 0px 5px;
   font-weight: normal;
   font-size: 1.5em;
   color: #c6d4df;
 }
 
-.achieveTxt h5 {
+.achieveTxt > h5 {
   margin: 0px 5px 5px 5px;
   font-weight: normal;
   font-size: 1.2em;
@@ -106,7 +125,7 @@ textarea {
     align-items: center;
   }
 
-  .game-image-container img {
+  .game-image-container > img {
     width: 50vw;
   }
 
@@ -120,7 +139,7 @@ textarea {
     width: 100vw;
   }
 
-  .search-filters label {
+  .search-filters > label {
     font-size: 2.5em;
   }
 
@@ -130,7 +149,7 @@ textarea {
     margin-right: 1em;
   }
 
-  #filter-select option {
+  #filter-select > option {
     font-size: 0.6em;
   }
 
@@ -153,7 +172,7 @@ textarea {
     margin-bottom: 1em;
   }
 
-  .search-result img {
+  .search-result > img {
     width: 85%;
   }
 
@@ -162,7 +181,7 @@ textarea {
     padding: 1em 0 0 0;
   }
 
-  .achieveImgHolder img {
+  .achieveImgHolder > img {
     width: 15vw;
     height: 15vw;
   }
@@ -171,11 +190,11 @@ textarea {
     height: 7vh;
   }
 
-  .achieveTxt h3 {
+  .achieveTxt > h3 {
     font-size: 2.5em;
   }
 
-  .achieveTxt h5 {
+  .achieveTxt > h5 {
     font-size: 1.8em;
   }
 
@@ -196,7 +215,7 @@ textarea {
     overflow: hidden;
   }
 
-  .achieveImgHolderTile img {
+  .achieveImgHolderTile > img {
     width: 20vw;
     height: 20vw;
   }
@@ -207,6 +226,13 @@ textarea {
 
   .pagination {
     font-size: 3.5em;
+  }
+
+  .circle-loader {
+    border: 24px solid #d4d4d4;
+    border-top: 24px solid #3292c9;
+    width: 20vw;
+    height: 20vw;
   }
 }
 
@@ -289,12 +315,15 @@ textarea {
 }
 
 .circle-loader {
-  border: 14px solid #d4d4d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 15px solid #d4d4d4;
   border-radius: 50%;
-  border-top: 14px solid #3292c9;
-  width: 100px;
-  height: 100px;
-  margin: 3em auto auto;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 1.5s linear infinite;
+  border-top: 15px solid #3292c9;
+  width: 8vw;
+  height: 8vw;
+  margin: auto auto;
+  -webkit-animation: spin 1.2s linear infinite; /* Safari */
+  animation: spin 1.2s linear infinite;
 }

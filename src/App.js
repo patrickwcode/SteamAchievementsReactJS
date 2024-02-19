@@ -25,6 +25,7 @@ class App extends React.Component {
       hasAchievements: true,
       hasSearched: false,
       areAchievementsLoading: true,
+      isSearchingForGames: false,
     };
 
     this.getAchievements = this.getAchievements.bind(this);
@@ -106,7 +107,6 @@ class App extends React.Component {
     ["keyup", "keydown"].forEach((event) => {
       input.addEventListener(event, () => {
         clearTimeout(this.timeoutGetId);
-
         // If user deletes search or presses a non-character key, this will not make another API call.
         if (
           input.value === "" ||
@@ -116,6 +116,7 @@ class App extends React.Component {
           return;
         } else {
           this.timeoutGetId = setTimeout(async () => {
+            this.setState({ isSearchingForGames: true });
             await fetch(
               `https://achievements.patrickwcode.com/api/applist-filter?name=${appName}`
             )
@@ -127,6 +128,8 @@ class App extends React.Component {
                   err
                 )
               );
+
+            this.setState({ isSearchingForGames: false });
             this.createGamesFoundArray(apps, appName);
           }, 700);
         }
@@ -326,13 +329,19 @@ class App extends React.Component {
                   this.searchForApp();
                 }}
               />
-              <div id="search-results" style={{ display: "none" }}>
-                {this.state.gamesFoundArr.length > 0 ? (
-                  this.state.gamesFoundArr
-                ) : (
-                  <h4 style={{fontSize: "2em"}}>No Games Found.</h4>
-                )}
-              </div>
+              {this.state.isSearchingForGames ? (
+                <div id="search-results">
+                  <div className="circle-loader" />
+                </div>
+              ) : (
+                <div id="search-results" style={{ display: "none" }}>
+                  {this.state.gamesFoundArr.length > 0 ? (
+                    this.state.gamesFoundArr
+                  ) : (
+                    <h4 style={{ fontSize: "2em" }}>No Games Found.</h4>
+                  )}
+                </div>
+              )}
             </div>
             <div className="game-info">
               <div className="subtitle">
