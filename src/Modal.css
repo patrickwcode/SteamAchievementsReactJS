@@ -11,15 +11,6 @@
   animation: fadeIn 0.3s linear;
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .modal-content {
   position: fixed;
   left: 0;
@@ -63,15 +54,6 @@
   animation: scale 1s linear;
 }
 
-/* @keyframes scale {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 100%;
-  }
-} */
-
 .percentText {
   position: relative;
   float: right;
@@ -88,8 +70,35 @@
   font-size: 1.8em;
 }
 
-@media screen and (max-width: 856px) {
+@media screen and (max-width: 1000px) {
   .modal-content {
-    top: 15%;
+    width: 100vw;
+    height: 50vh;
+    top: 25vh;
+    font-size: 3em;
+  }
+
+  .icon {
+    width: 30vw;
+    height: 30vw;
+  }
+
+  .percentBar {
+    width: 100vw;
+    height: 4.5vh;
+  }
+
+  .percentText {
+    font-size: 1.5em;
+    padding-right: 0.3em;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

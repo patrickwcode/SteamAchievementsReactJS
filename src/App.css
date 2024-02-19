@@ -14,7 +14,7 @@ textarea {
 }
 
 .achieveTileContainer {
-  width: 60%;
+  width: 70vw;
   display: flex;
   margin: auto;
   justify-content: center;
