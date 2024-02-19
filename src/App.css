@@ -6,15 +6,15 @@ textarea {
 
 #search-results {
   position: absolute;
-  left: 20vw;
-  width: 60vw;
+  left: 30vw;
+  width: 40vw;
   margin-top: 0.1em;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   z-index: 100;
 }
 
 .search-result > img {
-  width: 45%;
+  width: 40%;
   margin-top: 1em;
 }
 
@@ -41,6 +41,11 @@ textarea {
 
 .achieveImgHolder {
   padding-right: 0.2em;
+}
+
+.achieveImgHolder > img {
+  width: 5vw;
+  height:5vw;
 }
 
 .achieveImgHolderTile {
@@ -163,17 +168,16 @@ textarea {
     left: 15vw;
     width: 70vw;
     margin-top: 0.1em;
-    background-color: rgba(0, 0, 0, 0.8);
     z-index: 100;
   }
 
   .search-result {
     width: 100%;
-    margin-bottom: 1em;
   }
 
   .search-result > img {
-    width: 85%;
+    margin-top: 0.5em;
+    width: 70%;
   }
 
   .achieveRow {
